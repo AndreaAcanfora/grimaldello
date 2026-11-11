@@ -1,6 +1,6 @@
 # grimaldello results
 
-Generated 2026-11-11T20:59:13.064Z.
+Generated 2026-11-11T21:09:42.127Z.
 
 | Library | Language | Version |
 |---|---|---|
@@ -110,7 +110,7 @@ Impact: **security** means an honest browser under attack can produce the input;
 
 ### `reg-origin-trailing-slash`: Origin with a trailing slash
 
-Impact: hardening. Spec: §7.1 step 10 + §5.8.1: origin is the serialized origin, compared exactly
+Impact: hardening. Spec: §7.1 step 9 + §5.8.1: origin is the serialized origin, compared exactly
 
 - ✅ **simplewebauthn**: reject: `Unexpected response origin "https://example.com/", expected one of: https://example.com`
 - ✅ **py_webauthn**: reject: `InvalidRegistrationResponse: Unexpected client data origin "https://example.com/", expected "https://example.com"`
@@ -150,7 +150,7 @@ Impact: hardening. Spec: §5.8.1.2: the JSON is not in the limited verification 
 
 ### `reg-cross-origin-true`: crossOrigin: true without a topOrigin the RP allows
 
-Impact: security. Spec: §7.1 step 11 (Level 3): the RP did not opt in to cross-origin iframes
+Impact: security. Spec: §7.1 steps 10–11 (Level 3): the RP did not opt in to cross-origin iframes
 
 - 🔓 **simplewebauthn**: accept
 - 🔓 **py_webauthn**: accept
@@ -184,7 +184,7 @@ Received b: "t4ffl47H5E1V6K49gJApltPypFiuJ5j96pCRuTnNq5U="
 
 ### `auth-cross-origin-true`: crossOrigin: true without a topOrigin the RP allows
 
-Impact: security. Spec: §7.2 step 14 (Level 3): the RP did not opt in to cross-origin iframes
+Impact: security. Spec: §7.2 steps 13–14 (Level 3): the RP did not opt in to cross-origin iframes
 
 - ✅ **simplewebauthn**: reject: `Detected cross-origin authentication response from top origin of "https://evil.test", but a value for 'expectedTopOrigin' was not specified when calling 'verifyAuthenticationResponse()'`
 - 🔓 **py_webauthn**: accept
@@ -234,7 +234,7 @@ Impact: hardening. Spec: §7.1: the RP stores the credential ID from authData, s
 
 ### `reg-cred-id-too-long`: Credential ID of 1024 bytes
 
-Impact: hardening. Spec: §7.1 step 23: credentialId must be at most 1023 bytes
+Impact: hardening. Spec: §7.1 step 28: credentialId must be at most 1023 bytes
 
 - 🔓 **simplewebauthn**: accept
 - 🔓 **py_webauthn**: accept
@@ -285,7 +285,7 @@ Impact: hardening. Spec: RFC 9052 §7: duplicate labels make the key invalid
 
 ### `cose-missing-alg`: COSE key without alg (3)
 
-Impact: hardening. Spec: §7.1 step 21 (Level 3): alg must be present and match pubKeyCredParams
+Impact: hardening. Spec: §7.1 step 20 (Level 3): alg must be present and match pubKeyCredParams
 
 - ✅ **simplewebauthn**: reject: `Credential public key was missing numeric alg`
 - ✅⚠️ **py_webauthn**: reject: `KeyError: <COSEKey.ALG: 3>`
@@ -475,7 +475,7 @@ Impact: hardening. Spec: §8.7: the none attStmt is an empty map
 
 ### `att-unknown-fmt`: Unknown attestation format
 
-Impact: hardening. Spec: §7.1 step 24: fmt must be a supported format
+Impact: hardening. Spec: §7.1 step 21: fmt must be a supported format
 
 - ✅ **simplewebauthn**: reject: `Unsupported Attestation Format: grimaldello`
 - ✅ **py_webauthn**: reject: `InvalidRegistrationResponse: Unsupported attestation type "grimaldello"`

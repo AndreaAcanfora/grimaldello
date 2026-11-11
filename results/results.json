@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T20:59:13.064Z",
+  "generatedAt": "2026-11-11T21:09:42.127Z",
   "adapters": [
     {
       "name": "simplewebauthn",
@@ -22,8 +22,8 @@
     {
       "name": "java-webauthn-server",
       "language": "Java",
-      "version": "2.10.1",
-      "library": "java-webauthn-server"
+      "library": "java-webauthn-server",
+      "version": "2.10.1"
     },
     {
       "name": "webauthn-rs",
@@ -263,7 +263,7 @@
       "category": "baseline",
       "ceremony": "authentication",
       "expect": "accept",
-      "spec": "§7.2 step 22: counters that are both zero are not a clone signal",
+      "spec": "§7.2 steps 22–23: counters that are both zero are not a clone signal",
       "impact": "hardening",
       "results": {
         "simplewebauthn": {
@@ -295,7 +295,7 @@
       "category": "client-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 9",
+      "spec": "§7.1 step 8",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -332,7 +332,7 @@
       "category": "client-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 10",
+      "spec": "§7.1 step 9",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -369,7 +369,7 @@
       "category": "client-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 10: the RP did not list https://evil.example.com as an expected origin",
+      "spec": "§7.1 step 9: the RP did not list https://evil.example.com as an expected origin",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -406,7 +406,7 @@
       "category": "client-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 10 + §5.8.1: origin is the serialized origin, compared exactly",
+      "spec": "§7.1 step 9 + §5.8.1: origin is the serialized origin, compared exactly",
       "impact": "hardening",
       "results": {
         "simplewebauthn": {
@@ -511,7 +511,7 @@
       "category": "client-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 10",
+      "spec": "§7.1 step 9",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -548,7 +548,7 @@
       "category": "client-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 10: a parser that splits on '@' sees example.com",
+      "spec": "§7.1 step 9: a parser that splits on '@' sees example.com",
       "impact": "hardening",
       "results": {
         "simplewebauthn": {
@@ -729,7 +729,7 @@
       "category": "client-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 11 (Level 3): the RP did not opt in to cross-origin iframes",
+      "spec": "§7.1 steps 10–11 (Level 3): the RP did not opt in to cross-origin iframes",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -865,7 +865,7 @@
       "category": "client-data",
       "ceremony": "authentication",
       "expect": "reject",
-      "spec": "§7.2 step 12",
+      "spec": "§7.2 step 11",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -902,7 +902,7 @@
       "category": "client-data",
       "ceremony": "authentication",
       "expect": "reject",
-      "spec": "§7.2 step 13",
+      "spec": "§7.2 step 12",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -939,7 +939,7 @@
       "category": "client-data",
       "ceremony": "authentication",
       "expect": "reject",
-      "spec": "§7.2 step 11",
+      "spec": "§7.2 step 10",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -976,7 +976,7 @@
       "category": "client-data",
       "ceremony": "authentication",
       "expect": "reject",
-      "spec": "§7.2 step 14 (Level 3): the RP did not opt in to cross-origin iframes",
+      "spec": "§7.2 steps 13–14 (Level 3): the RP did not opt in to cross-origin iframes",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -1121,7 +1121,7 @@
       "category": "authenticator-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 16 (Level 3: unless conditional create was requested)",
+      "spec": "§7.1 step 15 (Level 3: unless conditional create was requested)",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -1158,7 +1158,7 @@
       "category": "authenticator-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 17",
+      "spec": "§7.1 step 16",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -1233,7 +1233,7 @@
       "category": "authenticator-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§6.1.3: BS=1 with BE=0 is an invalid combination; §7.1 step 18",
+      "spec": "§6.1.3: BS=1 with BE=0 is an invalid combination; §7.1 step 17",
       "impact": "hardening",
       "results": {
         "simplewebauthn": {
@@ -1412,7 +1412,7 @@
       "category": "authenticator-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 23: credentialId must be at most 1023 bytes",
+      "spec": "§7.1 step 28: credentialId must be at most 1023 bytes",
       "impact": "hardening",
       "results": {
         "simplewebauthn": {
@@ -1593,7 +1593,7 @@
       "category": "authenticator-data",
       "ceremony": "authentication",
       "expect": "reject",
-      "spec": "§7.2 step 22: a possible cloned authenticator; the RP decides, but silently accepting defeats the counter",
+      "spec": "§7.2 steps 22–23: a possible cloned authenticator; the RP decides, but silently accepting defeats the counter",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -1630,7 +1630,7 @@
       "category": "authenticator-data",
       "ceremony": "authentication",
       "expect": "reject",
-      "spec": "§7.2 step 22: the counter must be strictly greater",
+      "spec": "§7.2 steps 22–23: the counter must be strictly greater",
       "impact": "security",
       "results": {
         "simplewebauthn": {
@@ -1987,7 +1987,7 @@
       "category": "cose-key",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 21 (Level 3): alg must be present and match pubKeyCredParams",
+      "spec": "§7.1 step 20 (Level 3): alg must be present and match pubKeyCredParams",
       "impact": "hardening",
       "results": {
         "simplewebauthn": {
@@ -2026,7 +2026,7 @@
       "category": "cose-key",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 21: alg must be one of the requested algorithms",
+      "spec": "§7.1 step 20: alg must be one of the requested algorithms",
       "impact": "hardening",
       "results": {
         "simplewebauthn": {
@@ -2852,7 +2852,7 @@
       "category": "attestation",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 step 24: fmt must be a supported format",
+      "spec": "§7.1 step 21: fmt must be a supported format",
       "impact": "hardening",
       "results": {
         "simplewebauthn": {
