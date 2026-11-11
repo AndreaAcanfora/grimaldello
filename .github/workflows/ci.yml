@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Weekly, to catch new library releases.
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: adapters/go-webauthn/go.mod
+          cache-dependency-path: adapters/go-webauthn/go.sum
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+          cache-dependency-path: adapters/java-webauthn-server/pom.xml
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: adapters/webauthn-rs
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Vectors are up to date
+        run: node src/cli.ts generate && git diff --exit-code vectors/
+      - run: node src/cli.ts build
+      - name: Run every adapter
+        run: node src/cli.ts run
+      - run: cat results/RESULTS.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: results
+          path: results/

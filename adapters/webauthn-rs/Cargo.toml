@@ -1,0 +1,17 @@
+[package]
+name = "grimaldello-adapter-webauthn-rs"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[[bin]]
+name = "adapter"
+path = "src/main.rs"
+
+[dependencies]
+webauthn-rs-core = "=0.5.5"
+serde_json = "1"
+serde = "1"
+url = "2"
+# Build OpenSSL from source so the adapter does not need system headers.
+openssl = { version = "0.10", features = ["vendored"] }

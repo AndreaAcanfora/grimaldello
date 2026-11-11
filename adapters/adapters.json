@@ -1,0 +1,7 @@
+[
+  {"name": "simplewebauthn", "cwd": "adapters/simplewebauthn", "build": ["npm", "ci", "--silent"], "command": ["node", "adapter.mjs"]},
+  {"name": "py_webauthn", "cwd": "adapters/py_webauthn", "build": ["python3", "-m", "pip", "install", "-q", "--target", ".deps", "-r", "requirements.txt"], "command": ["env", "PYTHONPATH=.deps", "python3", "adapter.py"]},
+  {"name": "go-webauthn", "cwd": "adapters/go-webauthn", "build": ["go", "build", "-o", "bin/adapter", "."], "command": ["bin/adapter"]},
+  {"name": "java-webauthn-server", "cwd": "adapters/java-webauthn-server", "build": ["mvn", "-q", "-B", "package"], "command": ["java", "-jar", "target/adapter.jar"]},
+  {"name": "webauthn-rs", "cwd": "adapters/webauthn-rs", "build": ["cargo", "build", "--release", "-q"], "command": ["target/release/adapter"]}
+]

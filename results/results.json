@@ -1,0 +1,3144 @@
+{
+  "generatedAt": "2026-11-11T20:59:13.064Z",
+  "adapters": [
+    {
+      "name": "simplewebauthn",
+      "library": "@simplewebauthn/server",
+      "version": "14.1.0",
+      "language": "TypeScript"
+    },
+    {
+      "name": "py_webauthn",
+      "library": "py_webauthn",
+      "version": "3.0.1",
+      "language": "Python"
+    },
+    {
+      "name": "go-webauthn",
+      "language": "Go",
+      "library": "go-webauthn",
+      "version": "v0.18.2"
+    },
+    {
+      "name": "java-webauthn-server",
+      "language": "Java",
+      "version": "2.10.1",
+      "library": "java-webauthn-server"
+    },
+    {
+      "name": "webauthn-rs",
+      "language": "Rust",
+      "library": "webauthn-rs",
+      "version": "0.5.5"
+    }
+  ],
+  "cases": [
+    {
+      "id": "reg-baseline-es256",
+      "title": "Valid registration, ES256, attestation none",
+      "category": "baseline",
+      "ceremony": "registration",
+      "expect": "accept",
+      "spec": "§7.1: a well-formed ceremony",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-baseline-eddsa",
+      "title": "Valid registration, EdDSA (Ed25519)",
+      "category": "baseline",
+      "ceremony": "registration",
+      "expect": "accept",
+      "spec": "§7.1, RFC 9053 §2.2",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-baseline-rs256",
+      "title": "Valid registration, RS256",
+      "category": "baseline",
+      "ceremony": "registration",
+      "expect": "accept",
+      "spec": "§7.1, RFC 8812 §2",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-baseline-packed-self",
+      "title": "Valid registration, packed self-attestation",
+      "category": "baseline",
+      "ceremony": "registration",
+      "expect": "accept",
+      "spec": "§8.2 packed, self attestation",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-baseline-es256",
+      "title": "Valid authentication, ES256",
+      "category": "baseline",
+      "ceremony": "authentication",
+      "expect": "accept",
+      "spec": "§7.2: a well-formed ceremony",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-baseline-eddsa",
+      "title": "Valid authentication, EdDSA",
+      "category": "baseline",
+      "ceremony": "authentication",
+      "expect": "accept",
+      "spec": "§7.2",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-baseline-rs256",
+      "title": "Valid authentication, RS256",
+      "category": "baseline",
+      "ceremony": "authentication",
+      "expect": "accept",
+      "spec": "§7.2",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-signcount-zero",
+      "title": "Authenticator that never increments the counter (both 0)",
+      "category": "baseline",
+      "ceremony": "authentication",
+      "expect": "accept",
+      "spec": "§7.2 step 22: counters that are both zero are not a clone signal",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-wrong-challenge",
+      "title": "Challenge does not match",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 9",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected registration response challenge \"88FlS7E5-QZ2KWOoiaf0yv6Il1L74MA6OTt_dUmdKbY\", expected \"8sFlS7E5-QZ2KWOoiaf0yv6Il1L74MA6OTt_dUmdKbY\"",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Client data challenge was not expected challenge",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating challenge Expected b Value: \"8sFlS7E5-QZ2KWOoiaf0yv6Il1L74MA6OTt_dUmdKbY\"\nReceived b: \"88FlS7E5-QZ2KWOoiaf0yv6Il1L74MA6OTt_dUmdKbY\"\n",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect challenge.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "MismatchedChallenge",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-wrong-origin",
+      "title": "Origin from another site",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 10",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"https://evil.test\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data origin \"https://evil.test\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating origin Expected Values: [https://example.com], Received: https://evil.test",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: https://evil.test",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidRPOrigin",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-origin-subdomain",
+      "title": "Origin is a subdomain of the RP",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 10: the RP did not list https://evil.example.com as an expected origin",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"https://evil.example.com\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data origin \"https://evil.example.com\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating origin Expected Values: [https://example.com], Received: https://evil.example.com",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: https://evil.example.com",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidRPOrigin",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-origin-trailing-slash",
+      "title": "Origin with a trailing slash",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 10 + §5.8.1: origin is the serialized origin, compared exactly",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"https://example.com/\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data origin \"https://example.com/\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: https://example.com/",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-origin-uppercase",
+      "title": "Origin with an uppercase host",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.8.1: browsers serialize the origin in lowercase, so this never comes from a real browser",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"https://EXAMPLE.com\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data origin \"https://EXAMPLE.com\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: https://EXAMPLE.com",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-origin-default-port",
+      "title": "Origin with the default port spelled out",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.8.1: the serialized origin omits the default port",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"https://example.com:443\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data origin \"https://example.com:443\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: https://example.com:443",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-origin-http",
+      "title": "Origin over plain http",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 10",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"http://example.com\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data origin \"http://example.com\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating origin Expected Values: [https://example.com], Received: http://example.com",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: http://example.com",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidRPOrigin",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-origin-userinfo",
+      "title": "Origin with userinfo (https://example.com@evil.test)",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 10: a parser that splits on '@' sees example.com",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"https://example.com@evil.test\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data origin \"https://example.com@evil.test\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating origin Expected Values: [https://example.com], Received: https://example.com@evil.test",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: https://example.com@evil.test",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidRPOrigin",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-type-get",
+      "title": "type is webauthn.get in a registration",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 7",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected registration response type: webauthn.get",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data type \"webauthn.get\", expected \"ClientDataType.WEBAUTHN_CREATE\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating ceremony type Expected Value: webauthn.create, Received: webauthn.get",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: The \"type\" in the client data must be exactly \"webauthn.create\", was: webauthn.get",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidClientDataType",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-dup-challenge-first",
+      "title": "clientDataJSON with two challenge members, the wrong one first",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.8.1.2: the JSON is not in the limited verification form; parsers disagree on which duplicate wins",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseJSONFailure(Error(\"duplicate field `challenge`\", line: 1, column: 95))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-dup-challenge-last",
+      "title": "clientDataJSON with two challenge members, the wrong one last",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.8.1.2: duplicate members; most JSON parsers keep the last one",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected registration response challenge \"mbjX9hU0U3KRsM_uDSxLaomox-YFJENigaC_3v0cO1o\", expected \"HIBxu8LHNXgUyBI3H1PfFj1bWDuauroIC-P6wjikEys\"",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Client data challenge was not expected challenge",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating challenge Expected b Value: \"HIBxu8LHNXgUyBI3H1PfFj1bWDuauroIC-P6wjikEys\"\nReceived b: \"mbjX9hU0U3KRsM_uDSxLaomox-YFJENigaC_3v0cO1o\"\n",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect challenge.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseJSONFailure(Error(\"duplicate field `challenge`\", line: 1, column: 146))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-dup-origin-last",
+      "title": "clientDataJSON with a second, malicious origin member",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.8.1.2: duplicate members",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"https://evil.test\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected client data origin \"https://evil.test\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating origin Expected Values: [https://example.com], Received: https://evil.test",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: https://evil.test",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseJSONFailure(Error(\"duplicate field `origin`\", line: 1, column: 143))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-cross-origin-true",
+      "title": "crossOrigin: true without a topOrigin the RP allows",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 11 (Level 3): the RP did not opt in to cross-origin iframes",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating cross origin flag The cross origin flag is invalid due to the configuration.",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "CredentialCrossOrigin",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-challenge-padded",
+      "title": "Challenge encoded as base64url with = padding",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.8.1: challenge is base64url without padding; the decoded bytes still match",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected registration response challenge \"Rww0pt4WFHzpTH1KGg8omzs2KgGdMJzDxs1QvAJQKyk=\", expected \"Rww0pt4WFHzpTH1KGg8omzs2KgGdMJzDxs1QvAJQKyk\"",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating challenge Expected b Value: \"Rww0pt4WFHzpTH1KGg8omzs2KgGdMJzDxs1QvAJQKyk\"\nReceived b: \"Rww0pt4WFHzpTH1KGg8omzs2KgGdMJzDxs1QvAJQKyk=\"\n",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-challenge-std-base64",
+      "title": "Challenge encoded as standard base64 (+ and /)",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.8.1: challenge is base64url",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected registration response challenge \"t4ffl47H5E1V6K49gJApltPypFiuJ5j96pCRuTnNq5U=\", expected \"t4ffl47H5E1V6K49gJApltPypFiuJ5j96pCRuTnNq5U\"",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating challenge Expected b Value: \"t4ffl47H5E1V6K49gJApltPypFiuJ5j96pCRuTnNq5U\"\nReceived b: \"t4ffl47H5E1V6K49gJApltPypFiuJ5j96pCRuTnNq5U=\"\n",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-client-data-bom",
+      "title": "clientDataJSON starting with a UTF-8 byte order mark",
+      "category": "client-data",
+      "ceremony": "registration",
+      "expect": "either",
+      "spec": "§5.8.1.2: browsers never emit a BOM; JSON parsers differ",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "strict"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseJSONFailure(Error(\"expected value\", line: 1, column: 1))",
+          "outcome": "strict"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "auth-wrong-challenge",
+      "title": "Challenge does not match",
+      "category": "client-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 12",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected authentication response challenge \"lfjfoSHe_kCIJRByZdqGPJ-iPE0iZV8ehjtSH7rygR8\", expected \"lPjfoSHe_kCIJRByZdqGPJ-iPE0iZV8ehjtSH7rygR8\"",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Client data challenge was not expected challenge",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating challenge Expected b Value: \"lPjfoSHe_kCIJRByZdqGPJ-iPE0iZV8ehjtSH7rygR8\"\nReceived b: \"lfjfoSHe_kCIJRByZdqGPJ-iPE0iZV8ehjtSH7rygR8\"\n",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: Incorrect challenge.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "MismatchedChallenge",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-wrong-origin",
+      "title": "Origin from another site",
+      "category": "client-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 13",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected response origin \"https://evil.test\", expected one of: https://example.com",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Unexpected client data origin \"https://evil.test\", expected \"https://example.com\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating origin Expected Values: [https://example.com], Received: https://evil.test",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: Incorrect origin, please see the RelyingParty.origins setting: https://evil.test",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidRPOrigin",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-type-create",
+      "title": "type is webauthn.create in an authentication",
+      "category": "client-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 11",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected authentication response type: webauthn.create",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Unexpected client data type \"webauthn.create\", expected \"ClientDataType.WEBAUTHN_GET\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating ceremony type Expected Value: webauthn.get, Received: webauthn.create",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: The \"type\" in the client data must be exactly \"webauthn.get\", was: webauthn.create",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidClientDataType",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-cross-origin-true",
+      "title": "crossOrigin: true without a topOrigin the RP allows",
+      "category": "client-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 14 (Level 3): the RP did not opt in to cross-origin iframes",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Detected cross-origin authentication response from top origin of \"https://evil.test\", but a value for `expectedTopOrigin` was not specified when calling `verifyAuthenticationResponse()`",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating cross origin flag The cross origin flag is invalid due to the configuration.",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "auth-dup-challenge-last",
+      "title": "clientDataJSON with two challenge members, the wrong one last",
+      "category": "client-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§5.8.1.2",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected authentication response challenge \"mbjX9hU0U3KRsM_uDSxLaomox-YFJENigaC_3v0cO1o\", expected \"Qx-0X_3weXwn77w8VIrMm9H-CYeZifOxZ5ZFFyfSjes\"",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Client data challenge was not expected challenge",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating challenge Expected b Value: \"Qx-0X_3weXwn77w8VIrMm9H-CYeZifOxZ5ZFFyfSjes\"\nReceived b: \"mbjX9hU0U3KRsM_uDSxLaomox-YFJENigaC_3v0cO1o\"\n",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: Incorrect challenge.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseJSONFailure(Error(\"duplicate field `challenge`\", line: 1, column: 143))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-wrong-rpid-hash",
+      "title": "rpIdHash of another RP ID",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 14",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected RP ID hash",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected RP ID hash",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating the authenticator response RP Hash mismatch. Expected a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d2125586ce1947 and Received 9834f30f8b807769d8d40e882f51d93a6db8b3f785357b3b7086326fbd575a53",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Wrong RP ID hash.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidRPIDHash",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-rpid-hash-parent",
+      "title": "rpIdHash of a registrable suffix (com)",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 14: must equal SHA-256 of the RP ID the RP expects",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected RP ID hash",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unexpected RP ID hash",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating the authenticator response RP Hash mismatch. Expected a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d2125586ce1947 and Received 71b4f3a3748cd6843c01e293e701fce769f52381821e21daf2ff4fe9ea57a6f3",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Wrong RP ID hash.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidRPIDHash",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-up-clear",
+      "title": "User Present flag not set",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 16 (Level 3: unless conditional create was requested)",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "User presence was required, but user was not present",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: User presence was required, but was not present during attestation",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating the authenticator response User presence required but flag not set by authenticator",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: User Presence is required unless isConditionalCreate is true.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "UserNotPresent",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-uv-required-clear",
+      "title": "User verification required but UV flag not set",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 17",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "User verification was required, but user could not be verified",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: User verification is required but user was not verified during attestation",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating the authenticator response User verification required but flag not set by authenticator",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: User Verification is required.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "UserNotVerified",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-at-clear",
+      "title": "Attested credential data present but AT flag not set",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§6.1: authData is malformed",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Leftover bytes detected while parsing authenticator data",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.util.NoSuchElementException: No value present",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "MissingAttestationCredentialData",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-be-clear-bs-set",
+      "title": "Backup State set without Backup Eligible",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§6.1.3: BS=1 with BE=0 is an invalid combination; §7.1 step 18",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Single-device credential indicated that it was backed up, which should be impossible.",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidBackupFlags: Single-device credential indicated that it was backed up, which should be impossible.",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_request: Backup State Flag is true but Backup Eligible flag is false which is invalid ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.AuthenticatorAttestationResponse`, problem: Flag combination is invalid: BE=0, BS=1 in flags: 0x55\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 646] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"response\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "CredentialMayNotBeHardwareBound",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-ed-set-no-extensions",
+      "title": "ED flag set but no extensions follow",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§6.1: authData is malformed",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "No data",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.AuthenticatorAttestationResponse`, problem: Flags indicate there should be extension data, but no bytes remain after attested credential data.\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 646] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"response\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseNOMFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "reg-extensions-without-ed",
+      "title": "Extension data present but ED flag not set",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§6.1: trailing data after the credential public key",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Leftover bytes detected while parsing authenticator data",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.AuthenticatorAttestationResponse`, problem: Flags indicate no extension data, but 14 bytes remain after attested credential data.\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 665] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"response\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-authdata-trailing",
+      "title": "Trailing bytes after the credential public key",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§6.1: authData is malformed",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Leftover bytes detected while parsing authenticator data",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.AuthenticatorAttestationResponse`, problem: Flags indicate no extension data, but 4 bytes remain after attested credential data.\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 651] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"response\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-cred-id-mismatch",
+      "title": "Credential ID in authData differs from id/rawId",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1: the RP stores the credential ID from authData, so a mismatch lets a client register one ID and log in with another",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating the attested credential id The credential id reported by the client does not match the credential id in the attested credential data",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-cred-id-too-long",
+      "title": "Credential ID of 1024 bytes",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 23: credentialId must be at most 1023 bytes",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "reg-cred-id-length-overflow",
+      "title": "credentialIdLength larger than the remaining data",
+      "category": "authenticator-data",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§6.5.1: authData is truncated",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "No data",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.AuthenticatorAttestationResponse`, problem: Expected credential ID of length 65553, but attested credential data and extension data is only 127 bytes: ByteArray(00000000000000000000000000000000ffff11304f6e8daccbea0928476685a4c3e201203f5e7d9cbbdaf91837567594b3d2a5010203262001215820e0bfe37bd1004347ae43ea5696f5d6fe79157f1e73be490f014cf8d1873f3f832258209b7cd1e1c0504524b09d2efdfce5b95a1ac639b802f528ac17818b0ede98ad2b)\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 646] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"response\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseNOMFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-wrong-rpid-hash",
+      "title": "rpIdHash of another RP ID",
+      "category": "authenticator-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 15",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected RP ID hash",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Unexpected RP ID hash",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating the authenticator response RP Hash mismatch. Expected a379a6f6eeafb9a55e378c118034e2751e682fab9f2d30ab13d2125586ce1947 and Received 9834f30f8b807769d8d40e882f51d93a6db8b3f785357b3b7086326fbd575a53",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: Wrong RP ID hash.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "InvalidRPIDHash",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-up-clear",
+      "title": "User Present flag not set",
+      "category": "authenticator-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 16",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "User not present during authentication",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: User was not present during authentication",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating the authenticator response User presence required but flag not set by authenticator",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: User Presence is required.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "UserNotPresent",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-uv-required-clear",
+      "title": "User verification required but UV flag not set",
+      "category": "authenticator-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 17",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "User verification required, but user could not be verified",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: User verification is required but user was not verified during authentication",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "verification_error: Error validating the authenticator response User verification required but flag not set by authenticator",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: User Verification is required.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "UserNotVerified",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-signcount-regressed",
+      "title": "Signature counter lower than the stored one",
+      "category": "authenticator-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 22: a possible cloned authenticator; the RP decides, but silently accepting defeats the counter",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Response counter value 5 was lower than expected 10",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Response sign count of 5 was not greater than current count of 10",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "CloneWarning set",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "InvalidSignatureCountException(credentialId=ByteArray(11304f6e8daccbea0928476685a4c3e201203f5e7d9cbbdaf91837567594b3d2), expectedMinimum=11, received=5)",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "CredentialPossibleCompromise",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-signcount-equal",
+      "title": "Signature counter equal to the stored one (non-zero)",
+      "category": "authenticator-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 22: the counter must be strictly greater",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Response counter value 10 was lower than expected 10",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Response sign count of 10 was not greater than current count of 10",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "CloneWarning set",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "InvalidSignatureCountException(credentialId=ByteArray(11304f6e8daccbea0928476685a4c3e201203f5e7d9cbbdaf91837567594b3d2), expectedMinimum=11, received=10)",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "CredentialPossibleCompromise",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-authdata-short",
+      "title": "authenticatorData of 36 bytes (one short)",
+      "category": "authenticator-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§6.1: authData is at least 37 bytes",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Authenticator data was 36 bytes, expected at least 37 bytes",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: authenticatorData was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error unmarshalling auth data ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.AuthenticatorAssertionResponse`, problem: AuthenticatorData byte array must be at least 37 bytes, was 36: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAA\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 554] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"response\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseNOMFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "auth-authdata-trailing",
+      "title": "Trailing bytes after authenticatorData",
+      "category": "authenticator-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§6.1: authData is malformed (and covered by the signature)",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Leftover bytes detected while parsing authenticator data",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: authenticatorData was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error unmarshalling auth data ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "auth-be-clear-bs-set",
+      "title": "Backup State set without Backup Eligible",
+      "category": "authenticator-data",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§6.1.3, §7.2 step 18",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Single-device credential indicated that it was backed up, which should be impossible.",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidBackupFlags: Single-device credential indicated that it was backed up, which should be impossible.",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_request: Backup State Flag is true but Backup Eligible flag is false which is invalid ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.AuthenticatorAssertionResponse`, problem: Flag combination is invalid: BE=0, BS=1 in flags: 0x15\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 556] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"response\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "CredentialMayNotBeHardwareBound",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "cbor-attobj-trailing",
+      "title": "Trailing bytes after the attestationObject",
+      "category": "cbor",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "RFC 8949 §5.3: not well-formed as a single data item",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseCBORFailure(ErrorImpl { code: TrailingData, offset: 195 })",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cbor-attobj-dup-fmt",
+      "title": "attestationObject with fmt twice (packed, then none)",
+      "category": "cbor",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§6.5.4 + CTAP2 canonical CBOR: duplicate keys are invalid",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Map is not supported or well formed",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseCBORFailure(ErrorImpl { code: Message(\"duplicate field `fmt`\"), offset: 0 })",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cbor-attobj-dup-authdata",
+      "title": "attestationObject with two authData members",
+      "category": "cbor",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "RFC 8949 §5.6: duplicate keys",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Map is not supported or well formed",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Wrong RP ID hash.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "ParseCBORFailure(ErrorImpl { code: Message(\"duplicate field `authData`\"), offset: 0 })",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "cbor-attobj-indefinite",
+      "title": "attestationObject as an indefinite-length map",
+      "category": "cbor",
+      "ceremony": "registration",
+      "expect": "either",
+      "spec": "CTAP2 canonical CBOR forbids it; WebAuthn does not say an RP must reject it",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Length not supported or not well formed",
+          "outcome": "strict"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "strict"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cbor-cose-dup-key",
+      "title": "COSE key with a duplicate x coordinate",
+      "category": "cbor",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "RFC 9052 §7: duplicate labels make the key invalid",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Map is not supported or well formed",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "parse_error: Error parsing attestation response ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.AuthenticatorAttestationResponse`, problem: Duplicate key already exists\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 693] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"response\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cbor-cose-nonminimal-int",
+      "title": "COSE key with a non-minimal integer (kty as 2-byte uint)",
+      "category": "cbor",
+      "ceremony": "registration",
+      "expect": "either",
+      "spec": "CTAP2 canonical CBOR forbids it; tolerant decoders accept it",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Length not supported or not well formed",
+          "outcome": "strict"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: attestationObject was malformed. See __cause__ for more info",
+          "outcome": "strict"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cose-missing-alg",
+      "title": "COSE key without alg (3)",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 21 (Level 3): alg must be present and match pubKeyCredParams",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Credential public key was missing numeric alg",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "KeyError: <COSEKey.ALG: 3>",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_attestation: Invalid attestation format Credential public key algorithm not supported",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.NullPointerException: Cannot invoke \"com.upokecenter.cbor.CBORObject.AsInt32()\" because the return value of \"com.upokecenter.cbor.CBORObject.get(com.upokecenter.cbor.CBORObject)\" is null",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "COSEKeyInvalidCBORValue",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "cose-alg-not-offered",
+      "title": "Credential algorithm not in pubKeyCredParams (EdDSA when only ES256 is offered)",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 21: alg must be one of the requested algorithms",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected public key alg \"-8\", expected one of \"-7\"",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unsupported credential public key alg \"-8\", expected one of: [<COSEAlgorithmIdentifier.ECDSA_SHA_256: -7>]",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_attestation: Invalid attestation format Credential public key algorithm not supported",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Unrequested credential key algorithm: got -8, expected one of: [ES256]",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "CredentialAlteredAlgFromRequest",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "cose-es256-p384",
+      "title": "alg ES256 with crv P-384",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "RFC 9053 §2.1: ES256 is ECDSA with P-256",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to parse credential public key",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "COSEKeyECDSAXYInvalid",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cose-es256-okp",
+      "title": "alg ES256 with an OKP (Ed25519) key",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "RFC 9053: algorithm and key type do not match",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: COSE key type (kty: 1) does not match algorithm (alg: ES256, expected kty: 2)",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "COSEKeyInvalidType",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cose-eddsa-rsa",
+      "title": "alg EdDSA with an RSA key",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "RFC 9053: algorithm and key type do not match",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: COSE key type (kty: 3) does not match algorithm (alg: EdDSA, expected kty: 1)",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "COSEKeyInvalidType",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cose-point-not-on-curve",
+      "title": "EC2 point not on P-256",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "SEC 1 §3.2.2: public key validation",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "OpenSSLError(ErrorStack([Error { code: 134217835, library: \"elliptic curve routines\", function: \"EC_POINT_set_affine_coordinates\", reason: \"point is not on curve\", file: \"crypto/ec/ec_lib.c\", line: 879 }]))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cose-ec2-short-x",
+      "title": "EC2 x coordinate of 31 bytes",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "RFC 9053 §7.1.1: x is the curve size, leading zeros included",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to parse credential public key",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "COSEKeyECDSAXYInvalid",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cose-ed25519-small-order",
+      "title": "Ed25519 public key of small order (the identity point)",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "RFC 8032 §5.1.7 / ZIP-215: a small-order key lets any signature with S=0 verify",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "cose-rsa-small-exponent",
+      "title": "RSA key with public exponent 1",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "e=1 makes every 'signature' equal to the padded message",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to parse credential public key",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "COSEKeyRSANEInvalid",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "cose-rsa-1024",
+      "title": "RSA key with a 1024-bit modulus",
+      "category": "cose-key",
+      "ceremony": "registration",
+      "expect": "either",
+      "spec": "Weak, but the specification sets no minimum size",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "COSEKeyRSANEInvalid",
+          "outcome": "strict"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "sig-wrong-data",
+      "title": "Signature over different data",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 21",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "verified: false",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: <nil> ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: Invalid assertion signature.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AuthenticationFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-es256-high-s",
+      "title": "ECDSA signature with high S (n - s)",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "either",
+      "spec": "WebAuthn does not require low-S; libraries disagree (malleability)",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-es256-raw",
+      "title": "ECDSA signature as raw r||s instead of DER",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§6.5.6: ES256 signatures are ASN.1 DER Ecdsa-Sig-Value",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "End of input reached before message was fully decoded (inconsistent offset and length values)",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: Signature invalid or not provided ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: Sun EC public key, 256 bits\n  public x coord: 101657115906528880993608077310728137724964072996866199550161459582146556411779\n  public y coord: 70329029117666270391999784332137693378445213897857827193568881981836234370347\n  parameters: secp256r1 [NIST P-256,X9.62 prime256v1] (1.2.840.10045.3.1.7), signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAASHVP5P_A4TXlnR4tDJ3H_41D9DK8pAmIirBbl4yDvO0 , signature: 5yeTQ_mDTvz9DJGc26I8K7RkkKLftMDSgyO5jYbqO8Fa8upzEYvsGVBF8cLosW4pOc8PWAX8liboRGoOwWIuEg",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "OpenSSLError(ErrorStack([]))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-es256-der-trailing",
+      "title": "DER signature with a trailing byte",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "X.690: DER has one encoding; trailing data is not DER",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: Signature invalid or not provided ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: Sun EC public key, 256 bits\n  public x coord: 101657115906528880993608077310728137724964072996866199550161459582146556411779\n  public y coord: 70329029117666270391999784332137693378445213897857827193568881981836234370347\n  parameters: secp256r1 [NIST P-256,X9.62 prime256v1] (1.2.840.10045.3.1.7), signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAAca_djWAEvezzZ7Eb27PoePV3LB2g4ld7tPbIurqrsT1 , signature: MEUCIQCcgLaP8pwL11aaRLAiQumDRYiWFLuHqNwL8BkoLCASzQIgaTvy66GvNieEThbHlS96_0vgdy75_nrM0XagsV_MBssA",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "OpenSSLError(ErrorStack([]))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "sig-es256-der-long-length",
+      "title": "DER signature with a non-minimal (long-form) length",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "X.690 §10.1: DER requires the shortest length form",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: Signature invalid or not provided ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: Sun EC public key, 256 bits\n  public x coord: 101657115906528880993608077310728137724964072996866199550161459582146556411779\n  public y coord: 70329029117666270391999784332137693378445213897857827193568881981836234370347\n  parameters: secp256r1 [NIST P-256,X9.62 prime256v1] (1.2.840.10045.3.1.7), signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAAelachWzXcJ6TEx39nx_-ZjohPIU6v696rnE3E2GOAvJ , signature: MIFFAiEAioHayzYcWgvSWjZE07A-KgzD4UQg4YJ_t5q36Wm8HCcCIGNoW1wJgHm7WXufgVjkq12LRI9XRqAq3ISTjQP_Z2O-",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "OpenSSLError(ErrorStack([]))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "sig-es256-der-padded-int",
+      "title": "DER signature with a needless leading zero in r",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "X.690 §8.3.2: integers use the minimum number of bytes",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Invalid signature component length 33, expected 32",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: Signature invalid or not provided ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: Sun EC public key, 256 bits\n  public x coord: 101657115906528880993608077310728137724964072996866199550161459582146556411779\n  public y coord: 70329029117666270391999784332137693378445213897857827193568881981836234370347\n  parameters: secp256r1 [NIST P-256,X9.62 prime256v1] (1.2.840.10045.3.1.7), signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAAUYBb1loBvl7Z3gVqlXJx-ADvscUgKtb61M3xCvVdGtc , signature: MEUCIQB0wHGy-4UbcHJJIoPvEoCn6feHcuLtWQqSb4AyFFXaQAIgF8HCsNqkeGc1Fu9vVEDfdFUDo8lfPVZCjeYLBjSzbcE",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "OpenSSLError(ErrorStack([]))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-es256-zero",
+      "title": "ECDSA signature with r = s = 0",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "FIPS 186-5 §6.4.2: r and s must be in [1, n-1]",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "verified: false",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: <nil> ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: Invalid assertion signature.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AuthenticationFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-es256-s-equals-n",
+      "title": "ECDSA signature with s = n",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "FIPS 186-5 §6.4.2: s must be < n",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "verified: false",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: <nil> ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.AssertionFailedException: java.lang.IllegalArgumentException: Invalid assertion signature.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AuthenticationFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-eddsa-s-plus-l",
+      "title": "Ed25519 signature with S + L (non-canonical S)",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "RFC 8032 §5.1.7: S must be < L",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "verified: false",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: <nil> ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: algorithm = Ed25519, unparsed keybits = \n0000: B3 C2 C2 E6 7C 23 F1 DF   17 52 83 7D D4 BF 00 21  .....#...R.....!\n0010: 6A FF EC 90 77 71 BB FA   27 CC 15 4B FC 0A 82 DA  j...wq..'..K....\n, signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAAfbxs_SJ12HLNQsfgX4rj95kDghbMG2wjhHYg1_lwEkU , signature: w1EbJmvvob8Xb7xMsf81VNX45YTw-ZDOzn8L5q0ca6tc-TBFXvSHdiqFCIoSALn9rDTm8lpPeqUH5Z9okqjVGQ",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AuthenticationFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-eddsa-truncated",
+      "title": "Ed25519 signature of 63 bytes",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "RFC 8032: signatures are 64 bytes",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "verified: false",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: <nil> ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: algorithm = Ed25519, unparsed keybits = \n0000: B3 C2 C2 E6 7C 23 F1 DF   17 52 83 7D D4 BF 00 21  .....#...R.....!\n0010: 6A FF EC 90 77 71 BB FA   27 CC 15 4B FC 0A 82 DA  j...wq..'..K....\n, signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAAfS1O_ogJqFBuuZuv8Jp9V4enrKU3YY_bU_D8qH9XItm , signature: J4NU3bLUh-7fVTKd6aQ3J8gLHN_Jn1Iyxd4RLIkt3HKuilw7LeFPGgAVgbvE32AD6rHwdL6Vaw5GZFHd03Np",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AuthenticationFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-rs256-leading-zero",
+      "title": "RSA signature with an extra leading zero byte",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "RFC 8017 §8.2.2: the signature must be exactly k bytes",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "verified: false",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: crypto/rsa: verification error ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: Sun RSA public key, 2048 bits\n  params: null\n  modulus: 17530185829439766408081024833828297601143126341689732899714931255080667059562160514199501132434607417001961239667138192357596283177407177595958372017035409435799745761477158610610924234726373269197229625346296377227529241691294981576900337850174943394858161491191689021940425998826800182220839686756342272346448704460704633107449247062874552719725403005822005979113990636560245600995195578061830184346758928353974002666060262797608656650526383806368163164261783332851214667059110092477533669320330596557782097869322956186433733441164235096063769201786143394623350423749262953356833118991508630180572483555236979899241\n  public exponent: 65537, signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAAYM82dAQQVap8Ow9L5WpyDG6KsLhfqk3BIiMyv7_xwEk , signature: AAPXbXixGKSvSjRqqDtVm5k8sr0_Rq1X8mjJc5AS4iomqWY-HK6fEUiuNvTGNn2bOIpFfU7hhg8bak8E3qBlJ9zKGhUcLo0ECjL5rITlpAKI9lZTMdMM76P46-6PTPxtPKRI_l23lPqhFH9UdhKq4H0ypc9NHmcRGo3hQLoxxX5tl63eK_C8DFFpF9gKZVsTFjpaeabLK7atMBZifeyjtH8JaIlUwQhBqdMTjCZljcgJJkOIHHc5xN9QwN4NjVdK5tKTTxUQFA8L0808UnX30DxUrUHzLXom7ZSohlFH2coQDOF_VHwR6_OfaNNSlw2kgo0FQGaLJM54uQABUz0oqTM",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AuthenticationFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-empty",
+      "title": "Empty signature",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 21",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Input buffer has zero length",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: Signature invalid or not provided ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: Sun EC public key, 256 bits\n  public x coord: 101657115906528880993608077310728137724964072996866199550161459582146556411779\n  public y coord: 70329029117666270391999784332137693378445213897857827193568881981836234370347\n  parameters: secp256r1 [NIST P-256,X9.62 prime256v1] (1.2.840.10045.3.1.7), signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAAYSUpH7Eic8iwwehHboDnUClTomg5m_ZfpkEo1-viS5r , signature: ",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AuthenticationFailure",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "sig-other-credential",
+      "title": "Assertion signed by a different key than the registered one",
+      "category": "signature",
+      "ceremony": "authentication",
+      "expect": "reject",
+      "spec": "§7.2 step 21: verify with the stored credential public key",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Too big integer",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidAuthenticationResponse: Could not verify authentication signature",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_signature: Error validating the assertion signature: Signature invalid or not provided ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "java.lang.RuntimeException: Failed to verify signature. This could be a problem with your JVM environment, or a bug in webauthn-server-core. Public key: Sun EC public key, 256 bits\n  public x coord: 101657115906528880993608077310728137724964072996866199550161459582146556411779\n  public y coord: 70329029117666270391999784332137693378445213897857827193568881981836234370347\n  parameters: secp256r1 [NIST P-256,X9.62 prime256v1] (1.2.840.10045.3.1.7), signed data: o3mm9u6vuaVeN4wRgDTidR5oL6ufLTCrE9ISVYbOGUcFAAAAAZUTQMQWPqEsCbawXH8N2u3pDfrvnOy8WNoPNCO0uFj- , signature: wJcy5jg688lh7_pjiLYXFnNwFCqvodF2xeR0Ab11IeJmHOTgufzumrblMbPCXb-gfpoXWtKMiu62BMEEj8cjDw",
+          "unexpected": true,
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "OpenSSLError(ErrorStack([]))",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "att-none-with-statement",
+      "title": "fmt none with a non-empty attStmt",
+      "category": "attestation",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§8.7: the none attStmt is an empty map",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "None attestation had unexpected attestation statement",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: None attestation had unexpected attestation statement",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_attestation: Invalid attestation format Attestation format none with attestation present",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "att-unknown-fmt",
+      "title": "Unknown attestation format",
+      "category": "attestation",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§7.1 step 24: fmt must be a supported format",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unsupported Attestation Format: grimaldello",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Unsupported attestation type \"grimaldello\"",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_attestation: Invalid attestation format Attestation format grimaldello is unsupported",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AttestationNotSupported",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "att-packed-bad-sig",
+      "title": "Packed self-attestation with an invalid signature",
+      "category": "attestation",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§8.2 verification procedure",
+      "impact": "security",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "verified: false",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Could not verify attestation statement signature (Packed|Self)",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_attestation: Unable to verify signature ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Invalid attestation signature.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AttestationStatementSigInvalid",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "att-packed-alg-mismatch",
+      "title": "Packed self-attestation whose alg differs from the credential's",
+      "category": "attestation",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§8.2: in self attestation, alg must match the credential public key's alg",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Credential public key alg -7 did not equal attestation statement alg -257",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_attestation: Public key algorithm does not equal att statement algorithm ",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: Key algorithm and signature algorithm must be equal, was: Key: ES256, Sig: RS256",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AttestationStatementAlgMismatch",
+          "outcome": "ok"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "att-packed-missing-sig",
+      "title": "Packed attestation without sig",
+      "category": "attestation",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§8.2: attStmt must contain sig",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "No attestation signature provided in attestation statement (Packed)",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: Attestation statement was missing signature (Packed)",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_attestation: Error retrieving sig value packed",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.yubico.webauthn.exception.RegistrationFailedException: java.lang.IllegalArgumentException: attStmt.sig must be set to a binary value.",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "reject",
+          "error": "AttestationStatementSigMissing",
+          "outcome": "ok"
+        }
+      },
+      "divergent": false
+    },
+    {
+      "id": "enc-id-padded",
+      "title": "Credential id with base64url padding",
+      "category": "encoding",
+      "ceremony": "registration",
+      "expect": "either",
+      "spec": "§5.1: id is base64url without padding; the bytes still match rawId",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Credential ID was not base64url-encoded",
+          "outcome": "strict"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: id and raw_id were not equivalent",
+          "outcome": "strict"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_request: Parse error for Registration ID not base64.RawURLEncoded",
+          "outcome": "strict"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "enc-type-wrong",
+      "title": "Credential type other than public-key",
+      "category": "encoding",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.1: type is \"public-key\"",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Unexpected credential type password, expected \"public-key\"",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidJSONStructure: Credential had unexpected type",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_request: Parse error for Registration Type not public-key",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.PublicKeyCredentialType`, problem: Unknown PublicKeyCredentialType value: password\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 114] (through reference chain: com.yubico.webauthn.data.PublicKeyCredential[\"type\"])",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "enc-id-rawid-mismatch",
+      "title": "id and rawId refer to different credentials",
+      "category": "encoding",
+      "ceremony": "registration",
+      "expect": "reject",
+      "spec": "§5.1: id is the base64url encoding of rawId",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "reject",
+          "error": "Credential ID was not base64url-encoded",
+          "outcome": "ok"
+        },
+        "py_webauthn": {
+          "verdict": "reject",
+          "error": "InvalidRegistrationResponse: id and raw_id were not equivalent",
+          "outcome": "ok"
+        },
+        "go-webauthn": {
+          "verdict": "reject",
+          "error": "invalid_request: Parse error for Registration ID does not match rawId",
+          "outcome": "ok"
+        },
+        "java-webauthn-server": {
+          "verdict": "reject",
+          "error": "com.fasterxml.jackson.databind.exc.ValueInstantiationException: Cannot construct instance of `com.yubico.webauthn.data.PublicKeyCredential`, problem: \"id\" and \"rawId\" are not equal: ByteArray(7796b5d4f31231506f8eadcceb0a29486786a5c4e30221405f7e9dbcdbfa1938) != ByteArray(11304f6e8daccbea0928476685a4c3e201203f5e7d9cbbdaf91837567594b3d2)\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 675]",
+          "outcome": "ok"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "bypass"
+        }
+      },
+      "divergent": true
+    },
+    {
+      "id": "enc-auth-raw-padding",
+      "title": "authenticatorData as base64url with = padding",
+      "category": "encoding",
+      "ceremony": "authentication",
+      "expect": "either",
+      "spec": "Tolerated by many decoders; the bytes are the same",
+      "impact": "hardening",
+      "results": {
+        "simplewebauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "py_webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "go-webauthn": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "java-webauthn-server": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        },
+        "webauthn-rs": {
+          "verdict": "accept",
+          "outcome": "lenient"
+        }
+      },
+      "divergent": false
+    }
+  ],
+  "summary": {
+    "cases": 87,
+    "securityBypasses": 6,
+    "bypasses": 71,
+    "falseRejects": 0,
+    "unexpected": 15,
+    "crashes": 0,
+    "divergent": 34
+  }
+}
