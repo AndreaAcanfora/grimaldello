@@ -1,0 +1,8 @@
+node_modules/
+target/
+__pycache__/
+.venv/
+adapters/*/bin/
+adapters/java-webauthn-server/target/
+results/raw/
+adapters/java-webauthn-server/dependency-reduced-pom.xml

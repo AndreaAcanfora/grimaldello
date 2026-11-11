@@ -1,0 +1,63 @@
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "41 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: adapters/go-webauthn/go.mod
+          cache-dependency-path: adapters/go-webauthn/go.sum
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: maven
+          cache-dependency-path: adapters/java-webauthn-server/pom.xml
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: adapters/webauthn-rs
+      - run: npm ci
+      - run: node src/cli.ts build
+      - run: node src/cli.ts run
+      - name: Assemble the site
+        run: |
+          mkdir -p _site
+          cp site/index.html _site/
+          cp results/results.json _site/results.json
+          cp vectors/cases.jsonl _site/cases.jsonl
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

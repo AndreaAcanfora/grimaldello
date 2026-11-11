@@ -1,0 +1,22 @@
+# Each adapter pins its library; Dependabot opens a pull request when a new
+# release comes out, and CI shows how the results change.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /adapters/simplewebauthn
+    schedule: { interval: weekly }
+  - package-ecosystem: pip
+    directory: /adapters/py_webauthn
+    schedule: { interval: weekly }
+  - package-ecosystem: gomod
+    directory: /adapters/go-webauthn
+    schedule: { interval: weekly }
+  - package-ecosystem: maven
+    directory: /adapters/java-webauthn-server
+    schedule: { interval: weekly }
+  - package-ecosystem: cargo
+    directory: /adapters/webauthn-rs
+    schedule: { interval: weekly }
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: monthly }

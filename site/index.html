@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>grimaldello: WebAuthn library matrix</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="The same malformed passkey ceremonies, sent to five WebAuthn server libraries. Where they disagree, one of them is probably wrong.">
+<style>
+:root {
+  --bg: #fbfaf7; --fg: #1d1c1a; --muted: #6b6760; --line: #e4e0d8; --card: #ffffff;
+  --accent: #8a4b14; --ok: #2f7d4f; --bad: #b3261e; --warn: #9a6b00; --soft: #f2efe8;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #151413; --fg: #ece9e3; --muted: #a29d94; --line: #2e2c29; --card: #1d1c1a;
+    --accent: #e0a46a; --ok: #6cc28f; --bad: #ff8a80; --warn: #e6b450; --soft: #23211f; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 1180px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -0.02em; }
+h1 span { color: var(--accent); }
+.lede { color: var(--muted); max-width: 760px; margin: 0 0 24px; }
+a { color: var(--accent); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 0 0 24px; }
+.stat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.stat b { display: block; font-size: 26px; font-variant-numeric: tabular-nums; }
+.stat small { color: var(--muted); }
+.controls { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 0 0 12px; }
+.controls label { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); }
+select, input[type=search] { font: inherit; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; }
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; min-width: 760px; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); position: sticky; top: 0; background: var(--card); }
+th.lib, td.cell { text-align: center; width: 92px; }
+th.lib small { display: block; text-transform: none; letter-spacing: 0; }
+tr.case { cursor: pointer; }
+tr.case:hover td { background: var(--soft); }
+tr.case.open td { background: var(--soft); }
+td .id { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.tag { display: inline-block; font-size: 11px; border-radius: 99px; padding: 1px 8px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.tag.security { color: var(--bad); border-color: currentColor; }
+.cell { font-size: 17px; }
+.legend { color: var(--muted); font-size: 13px; margin: 10px 2px 24px; }
+tr.detail td { background: var(--soft); padding: 14px 16px 18px; }
+.detail h3 { margin: 0 0 4px; font-size: 15px; }
+.detail .spec { color: var(--muted); margin: 0 0 10px; }
+.verdicts { display: grid; gap: 4px; margin: 0 0 12px; }
+.verdicts div { font-size: 13px; }
+.verdicts code { font-family: var(--mono); font-size: 12px; color: var(--muted); word-break: break-word; }
+details { margin-top: 6px; }
+summary { cursor: pointer; color: var(--accent); }
+pre { font-family: var(--mono); font-size: 12px; white-space: pre-wrap; word-break: break-all; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px; max-height: 320px; overflow: auto; }
+footer { color: var(--muted); font-size: 13px; margin-top: 32px; }
+@media (max-width: 600px) { h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>grimaldello <span>🗝</span></h1>
+  <p class="lede">The same passkey (WebAuthn) ceremonies, each with one deliberate defect, sent to five server libraries. Where the libraries disagree, at least one of them is not following the specification. Click a row for the details and the exact bytes. <a href="https://github.com/AndreaAcanfora/grimaldello">Source and method</a>.</p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="controls">
+    <label>Impact <select id="f-impact"><option value="">all</option><option value="security">security</option><option value="hardening">hardening</option></select></label>
+    <label>Category <select id="f-cat"><option value="">all</option></select></label>
+    <label><input type="checkbox" id="f-div"> only where libraries disagree</label>
+    <label><input type="checkbox" id="f-bad"> only cases with a finding</label>
+    <input type="search" id="f-q" placeholder="Search cases" aria-label="Search cases">
+  </div>
+
+  <div class="wrap"><table><thead id="head"></thead><tbody id="body"></tbody></table></div>
+  <p class="legend">✅ follows the spec · 🔓 accepts what the spec says to reject · ⛔ rejects a valid ceremony · 💥 crash · 🟡 accepts / ⚪ rejects where the spec leaves the choice to the library · ➖ algorithm not supported · ⚠️ rejected by throwing an exception type the library does not document.<br>
+  <b>security</b>: an honest browser under attack can produce this input (phishing page, replay, cross-origin iframe). <b>hardening</b>: only a modified client or authenticator can, and it only affects the attacker's own credential.</p>
+
+  <footer id="foot"></footer>
+</main>
+<script>
+const MARK = { ok: "✅", bypass: "🔓", "false-reject": "⛔", crash: "💥", unsupported: "➖", lenient: "🟡", strict: "⚪" };
+const OUTCOME_TEXT = { ok: "follows the spec", bypass: "accepts what it must reject", "false-reject": "rejects a valid ceremony", crash: "crash", unsupported: "algorithm not supported", lenient: "accepts (spec leaves the choice)", strict: "rejects (spec leaves the choice)" };
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const b64 = (s) => { const t = s.replace(/-/g, "+").replace(/_/g, "/").replace(/=+$/, ""); const bin = atob(t + "===".slice((t.length + 3) % 4)); return Uint8Array.from(bin, (c) => c.charCodeAt(0)); };
+const hex = (u) => Array.from(u, (b) => b.toString(16).padStart(2, "0")).join(" ");
+const text = (u) => new TextDecoder().decode(u);
+
+let data, vectors = new Map(), open = null;
+
+function hasFinding(c) { return Object.values(c.results).some((r) => ["bypass", "false-reject", "crash"].includes(r.outcome) || r.unexpected); }
+
+function render() {
+  const names = data.adapters.map((a) => a.name);
+  const fi = document.getElementById("f-impact").value, fc = document.getElementById("f-cat").value;
+  const fd = document.getElementById("f-div").checked, fb = document.getElementById("f-bad").checked;
+  const q = document.getElementById("f-q").value.trim().toLowerCase();
+  document.getElementById("head").innerHTML = `<tr><th>Case</th><th>Impact</th><th>Spec says</th>${data.adapters.map((a) => `<th class="lib">${esc(a.library)}<small>${esc(a.language)} ${esc(a.version)}</small></th>`).join("")}</tr>`;
+  const rows = [];
+  for (const c of data.cases) {
+    if (fi && c.impact !== fi) continue;
+    if (fc && c.category !== fc) continue;
+    if (fd && !c.divergent) continue;
+    if (fb && !hasFinding(c)) continue;
+    if (q && !(c.id + " " + c.title + " " + c.spec).toLowerCase().includes(q)) continue;
+    const cells = names.map((n) => { const r = c.results[n]; return `<td class="cell" title="${esc(n)}: ${esc(OUTCOME_TEXT[r.outcome])}${r.unexpected ? ", undocumented exception" : ""}">${MARK[r.outcome]}${r.unexpected ? "⚠️" : ""}</td>`; }).join("");
+    rows.push(`<tr class="case${open === c.id ? " open" : ""}" data-id="${esc(c.id)}"><td>${esc(c.title)}<br><span class="id">${esc(c.id)}</span></td><td><span class="tag ${c.impact}">${c.impact}</span></td><td>${c.expect}</td>${cells}</tr>`);
+    if (open === c.id) rows.push(`<tr class="detail"><td colspan="${3 + names.length}">${detail(c, names)}</td></tr>`);
+  }
+  document.getElementById("body").innerHTML = rows.join("") || `<tr><td colspan="${3 + names.length}">No case matches the filters.</td></tr>`;
+}
+
+function detail(c, names) {
+  const v = vectors.get(c.id);
+  const verdicts = names.map((n) => { const r = c.results[n]; return `<div>${MARK[r.outcome]}${r.unexpected ? "⚠️" : ""} <b>${esc(n)}</b>: ${r.verdict}${r.error ? ` <code>${esc(r.error.slice(0, 300))}</code>` : ""}</div>`; }).join("");
+  let raw = "";
+  if (v) {
+    const reg = v.registration.response.response;
+    raw += `<details><summary>Registration: clientDataJSON and attestationObject</summary><pre>${esc(text(b64(reg.clientDataJSON)))}</pre><pre>${hex(b64(reg.attestationObject))}</pre></details>`;
+    if (v.authentication) {
+      const a = v.authentication.response.response;
+      raw += `<details><summary>Authentication: clientDataJSON, authenticatorData, signature</summary><pre>${esc(text(b64(a.clientDataJSON)))}</pre><pre>authenticatorData  ${hex(b64(a.authenticatorData))}\nsignature          ${hex(b64(a.signature))}\nstored signCount   ${v.authentication.storedSignCount}</pre></details>`;
+    }
+    raw += `<details><summary>The whole test vector (JSON)</summary><pre>${esc(JSON.stringify(v, null, 2))}</pre></details>`;
+  }
+  return `<h3>${esc(c.title)}</h3><p class="spec">${esc(c.spec)} · ${c.ceremony} · expected: ${c.expect}</p><div class="verdicts">${verdicts}</div>${raw}`;
+}
+
+async function main() {
+  const [res, vec] = await Promise.all([fetch("results.json"), fetch("cases.jsonl")]);
+  data = await res.json();
+  for (const line of (await vec.text()).split("\n")) if (line.trim()) { const c = JSON.parse(line); vectors.set(c.id, c); }
+  const s = data.summary;
+  const stat = (n, label) => `<div class="stat"><b>${n}</b><small>${label}</small></div>`;
+  document.getElementById("stats").innerHTML =
+    stat(`${s.cases} × ${data.adapters.length}`, "cases × libraries") +
+    stat(s.securityBypasses, "security-relevant inputs accepted") +
+    stat(s.bypasses - s.securityBypasses, "malformed inputs accepted (hardening)") +
+    stat(s.unexpected, "undocumented exceptions") +
+    stat(s.divergent, "cases where libraries disagree");
+  const cats = [...new Set(data.cases.map((c) => c.category))];
+  document.getElementById("f-cat").innerHTML += cats.map((c) => `<option>${esc(c)}</option>`).join("");
+  document.getElementById("foot").textContent = `Results generated ${new Date(data.generatedAt).toUTCString()} by the weekly CI run.`;
+  for (const id of ["f-impact", "f-cat", "f-div", "f-bad", "f-q"]) document.getElementById(id).addEventListener("input", render);
+  document.getElementById("body").addEventListener("click", (e) => {
+    const tr = e.target.closest("tr.case");
+    if (!tr) return;
+    open = open === tr.dataset.id ? null : tr.dataset.id;
+    render();
+  });
+  render();
+}
+main().catch((e) => { document.getElementById("body").innerHTML = `<tr><td>Could not load the results: ${esc(e.message)}</td></tr>`; });
+</script>
+</body>
+</html>

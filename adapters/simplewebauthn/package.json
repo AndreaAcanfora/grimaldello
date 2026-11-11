@@ -1,0 +1,2 @@
+{ "name": "grimaldello-adapter-simplewebauthn", "private": true, "type": "module",
+  "dependencies": { "@simplewebauthn/server": "14.1.0" } }
