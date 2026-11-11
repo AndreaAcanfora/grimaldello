@@ -6,3 +6,4 @@ adapters/*/bin/
 adapters/java-webauthn-server/target/
 results/raw/
 adapters/java-webauthn-server/dependency-reduced-pom.xml
+adapters/webauthn4j/dependency-reduced-pom.xml
