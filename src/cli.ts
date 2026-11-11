@@ -98,7 +98,15 @@ function run(only: string[]) {
   for (const spec of specs) {
     process.stderr.write(`running ${spec.name}... `);
     const t = Date.now();
-    results.push(runAdapter(spec, cases));
+    try {
+      results.push(runAdapter(spec, cases));
+    } catch (e) {
+      // Locally a missing toolchain should not stop the other libraries; in CI
+      // every adapter must run.
+      if (process.env.CI) throw e;
+      process.stderr.write(`skipped (${(e as Error).message.split("\n")[0]})\n`);
+      continue;
+    }
     process.stderr.write(`${Date.now() - t} ms\n`);
   }
   const analysis = analyze(cases, results);

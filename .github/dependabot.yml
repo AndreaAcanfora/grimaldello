@@ -17,6 +17,18 @@ updates:
   - package-ecosystem: cargo
     directory: /adapters/webauthn-rs
     schedule: { interval: weekly }
+  - package-ecosystem: composer
+    directory: /adapters/web-auth
+    schedule: { interval: weekly }
+  - package-ecosystem: maven
+    directory: /adapters/webauthn4j
+    schedule: { interval: weekly }
+  - package-ecosystem: nuget
+    directory: /adapters/fido2-net-lib
+    schedule: { interval: weekly }
+  - package-ecosystem: bundler
+    directory: /adapters/webauthn-ruby
+    schedule: { interval: weekly }
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: monthly }

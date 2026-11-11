@@ -1,6 +1,6 @@
 # grimaldello
 
-**A differential test suite for passkey (WebAuthn) server libraries.** It sends the same registration and login ceremonies, each with one deliberate defect, to five relying-party libraries in five languages, and reports where they disagree. When two libraries give different answers to the same bytes, at least one of them is not following the specification.
+**A differential test suite for passkey (WebAuthn) server libraries.** It sends the same registration and login ceremonies, each with one deliberate defect, to nine relying-party libraries in eight languages, and reports where they disagree. When two libraries give different answers to the same bytes, at least one of them is not following the specification.
 
 *Grimaldello* is Italian for “lock pick”.
 
@@ -13,6 +13,10 @@
 | [go-webauthn](https://github.com/go-webauthn/webauthn) | Go |
 | [java-webauthn-server](https://github.com/Yubico/java-webauthn-server) | Java |
 | [webauthn-rs](https://github.com/kanidm/webauthn-rs) | Rust |
+| [web-auth/webauthn-lib](https://github.com/web-auth/webauthn-framework) | PHP |
+| [webauthn4j](https://github.com/webauthn4j/webauthn4j) | Java |
+| [fido2-net-lib](https://github.com/passwordless-lib/fido2-net-lib) | C# |
+| [webauthn-ruby](https://github.com/cedarcode/webauthn-ruby) | Ruby |
 
 ## What it tests
 
@@ -38,16 +42,17 @@ The vectors are deterministic (fixed test keys, RFC 6979 ECDSA) and committed in
 The [results page](https://andreaacanfora.github.io/grimaldello/) is rebuilt every week. Each adapter pins its library version, and Dependabot opens a pull request when a new release comes out, so the CI run shows exactly what changed. As of the first run (November 2026, versions on the page):
 
 - No library accepted a wrong challenge, origin, RP ID, ceremony type, missing user presence or a bad signature. The core checks hold everywhere.
-- The Level 3 `topOrigin` check is uneven: SimpleWebAuthn checks it on login but not on registration, webauthn-rs (`allow_cross_origin`, off by default) on registration but not on login, py_webauthn and java-webauthn-server on neither. This only matters for sites that let other origins frame their login page.
+- The Level 3 `topOrigin` check is uneven: SimpleWebAuthn checks it on login but not on registration, webauthn-rs (`allow_cross_origin`, off by default) on registration but not on login, py_webauthn and java-webauthn-server on neither; webauthn-ruby only with `verify_cross_origin: true`, which is off by default. This only matters for sites that let other origins frame their login page.
 - Almost no library validates the credential public key at registration: points off the curve, mismatched algorithm and key type, a small-order Ed25519 key or RSA with `e = 1` are stored as if they were fine. java-webauthn-server rejects most of them.
 - Lenient parsing differs in every library: trailing bytes after authenticatorData or after the attestation object, duplicate CBOR keys (java-webauthn-server keeps the last one), non-DER ECDSA signatures (SimpleWebAuthn), credential IDs longer than 1023 bytes.
+- web-auth/webauthn-lib accepts ECDSA signatures in raw `r || s` form instead of DER, and, like java-webauthn-server, lets a plain `InvalidArgumentException` escape `check()` for malformed signatures.
 - java-webauthn-server answers malformed assertion signatures, which anyone can send for any account, with a `RuntimeException` instead of `AssertionFailedException`. An application that catches the documented exception answers 500 instead of 401.
 
 None of these is a way to log in as someone else. New findings with a security impact are reported privately to the maintainers before they are published.
 
 ## Run it
 
-You need Node.js 22.18+, plus the toolchain of each library you want to test (Python 3.10+, Go, Java 17+ with Maven, Rust).
+You need Node.js 22.18+, plus the toolchain of each library you want to test (Python 3.10+, Go, Java 17+ with Maven, Rust, PHP 8.2+ with Composer, .NET 10, Ruby 3.2+). Locally, adapters whose toolchain is missing are skipped; in CI every adapter must run.
 
 ```console
 npm ci
@@ -71,7 +76,7 @@ Add a directory under `adapters/` with a program that:
 1. prints `{"library": "...", "version": "...", "language": "..."}` when run with `--info`;
 2. for each JSON line on stdin, prints `{"id": "<case id>", "verdict": "accept" | "reject", "error": "..."}`;
 
-then add it to [`adapters/adapters.json`](adapters/adapters.json) with its build and run commands. Pull requests for more libraries (webauthn4j, the PHP and .NET ones, Ruby's `webauthn`) are welcome.
+then add it to [`adapters/adapters.json`](adapters/adapters.json) with its build and run commands. Pull requests for more libraries are welcome.
 
 ## Prior art
 

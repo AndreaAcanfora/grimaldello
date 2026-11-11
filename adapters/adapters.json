@@ -3,5 +3,9 @@
   {"name": "py_webauthn", "cwd": "adapters/py_webauthn", "build": ["python3", "-m", "pip", "install", "-q", "--target", ".deps", "-r", "requirements.txt"], "command": ["env", "PYTHONPATH=.deps", "python3", "adapter.py"]},
   {"name": "go-webauthn", "cwd": "adapters/go-webauthn", "build": ["go", "build", "-o", "bin/adapter", "."], "command": ["bin/adapter"]},
   {"name": "java-webauthn-server", "cwd": "adapters/java-webauthn-server", "build": ["mvn", "-q", "-B", "package"], "command": ["java", "-jar", "target/adapter.jar"]},
-  {"name": "webauthn-rs", "cwd": "adapters/webauthn-rs", "build": ["cargo", "build", "--release", "-q"], "command": ["target/release/adapter"]}
+  {"name": "webauthn-rs", "cwd": "adapters/webauthn-rs", "build": ["cargo", "build", "--release", "-q"], "command": ["target/release/adapter"]},
+  {"name": "web-auth", "cwd": "adapters/web-auth", "build": ["composer", "install", "-q", "--no-interaction"], "command": ["php", "adapter.php"]},
+  {"name": "webauthn4j", "cwd": "adapters/webauthn4j", "build": ["mvn", "-q", "-B", "package"], "command": ["java", "-jar", "target/adapter.jar"]},
+  {"name": "fido2-net-lib", "cwd": "adapters/fido2-net-lib", "build": ["dotnet", "build", "-c", "Release", "-o", "bin/out", "--nologo", "-v", "q"], "command": ["dotnet", "bin/out/Adapter.dll"]},
+  {"name": "webauthn-ruby", "cwd": "adapters/webauthn-ruby", "build": ["bundle", "install", "--quiet"], "command": ["bundle", "exec", "ruby", "adapter.rb"]}
 ]
