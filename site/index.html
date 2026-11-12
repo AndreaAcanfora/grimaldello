@@ -73,14 +73,14 @@ footer { color: var(--muted); font-size: 13px; margin-top: 32px; }
   </div>
 
   <div class="wrap"><table><thead id="head"></thead><tbody id="body"></tbody></table></div>
-  <p class="legend">✅ follows the spec · 🔓 accepts what the spec says to reject · ⛔ rejects a valid ceremony · 💥 crash · 🟡 accepts / ⚪ rejects where the spec leaves the choice to the library · ➖ algorithm not supported · ⚠️ rejected by throwing an exception type the library does not document.<br>
+  <p class="legend">✅ follows the spec · 🔓 accepts a security-relevant input the spec says to reject · 🟠 more permissive than the spec on a malformed input (a difference, not a vulnerability) · ⛔ rejects a valid ceremony · 💥 crash · 🟡 accepts / ⚪ rejects where the spec leaves the choice to the library · ➖ algorithm not supported · ⚠️ rejected by throwing an exception type the library does not document.<br>
   <b>security</b>: an honest browser under attack can produce this input (phishing page, replay, cross-origin iframe). <b>hardening</b>: only a modified client or authenticator can, and it only affects the attacker's own credential.</p>
 
   <footer id="foot"></footer>
 </main>
 <script>
-const MARK = { ok: "✅", bypass: "🔓", "false-reject": "⛔", crash: "💥", unsupported: "➖", lenient: "🟡", strict: "⚪" };
-const OUTCOME_TEXT = { ok: "follows the spec", bypass: "accepts what it must reject", "false-reject": "rejects a valid ceremony", crash: "crash", unsupported: "algorithm not supported", lenient: "accepts (spec leaves the choice)", strict: "rejects (spec leaves the choice)" };
+const MARK = { ok: "✅", bypass: "🔓", permissive: "🟠", "false-reject": "⛔", crash: "💥", unsupported: "➖", lenient: "🟡", strict: "⚪" };
+const OUTCOME_TEXT = { ok: "follows the spec", bypass: "accepts a security-relevant input it must reject", permissive: "more permissive than the spec on a malformed input", "false-reject": "rejects a valid ceremony", crash: "crash", unsupported: "algorithm not supported", lenient: "accepts (spec leaves the choice)", strict: "rejects (spec leaves the choice)" };
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const b64 = (s) => { const t = s.replace(/-/g, "+").replace(/_/g, "/").replace(/=+$/, ""); const bin = atob(t + "===".slice((t.length + 3) % 4)); return Uint8Array.from(bin, (c) => c.charCodeAt(0)); };
 const hex = (u) => Array.from(u, (b) => b.toString(16).padStart(2, "0")).join(" ");
@@ -88,7 +88,7 @@ const text = (u) => new TextDecoder().decode(u);
 
 let data, vectors = new Map(), open = null;
 
-function hasFinding(c) { return Object.values(c.results).some((r) => ["bypass", "false-reject", "crash"].includes(r.outcome) || r.unexpected); }
+function hasFinding(c) { return Object.values(c.results).some((r) => ["bypass", "permissive", "false-reject", "crash"].includes(r.outcome) || r.unexpected); }
 
 function render() {
   const names = data.adapters.map((a) => a.name);
@@ -135,7 +135,7 @@ async function main() {
   document.getElementById("stats").innerHTML =
     stat(`${s.cases} × ${data.adapters.length}`, "cases × libraries") +
     stat(s.securityBypasses, "security-relevant inputs accepted") +
-    stat(s.bypasses - s.securityBypasses, "malformed inputs accepted (hardening)") +
+    stat(s.permissive ?? (s.bypasses - s.securityBypasses), "malformed inputs accepted (hardening)") +
     stat(s.unexpected, "undocumented exceptions") +
     stat(s.divergent, "cases where libraries disagree");
   const cats = [...new Set(data.cases.map((c) => c.category))];

@@ -9,9 +9,12 @@ name = "adapter"
 path = "src/main.rs"
 
 [dependencies]
-webauthn-rs-core = "=0.5.5"
-serde_json = "1"
+# The public, recommended API. State serialisation is the feature applications
+# use to keep ceremony state in a database between requests.
+webauthn-rs = { version = "=0.6.2", features = ["danger-allow-state-serialisation"] }
 serde = "1"
+serde_json = "1"
 url = "2"
+uuid = "1"
 # Build OpenSSL from source so the adapter does not need system headers.
 openssl = { version = "0.10", features = ["vendored"] }

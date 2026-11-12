@@ -32,8 +32,8 @@
 
 Each case records what the WebAuthn Level 3 specification (or the RFC it points to) says a relying party must do, and an **impact**:
 
-- **security**: an honest browser can produce this input while under attack (a phishing page, a replayed response, a cross-origin iframe, a ceremony without a user gesture). Accepting it weakens what WebAuthn is there to protect.
-- **hardening**: only a modified client or authenticator can produce it, so the attacker can only affect their own credential. These still matter when more than one component parses the same data, and they are where parsers drift apart.
+- **security**: an honest browser can produce this input while under attack (a phishing page, a replayed response, a ceremony without a user gesture). Accepting it weakens what WebAuthn is there to protect.
+- **hardening**: only a modified client or authenticator can produce it, or the check is defence in depth. A library that accepts it is more permissive than the specification, which is a difference, not a vulnerability: excessive strictness can break real clients too. These cases are still useful where several components parse the same data.
 
 The vectors are deterministic (fixed test keys, RFC 6979 ECDSA) and committed in [`vectors/cases.jsonl`](vectors/cases.jsonl), so you can feed them to any other library.
 
@@ -42,13 +42,16 @@ The vectors are deterministic (fixed test keys, RFC 6979 ECDSA) and committed in
 The [results page](https://andreaacanfora.github.io/grimaldello/) is rebuilt every week. Each adapter pins its library version, and Dependabot opens a pull request when a new release comes out, so the CI run shows exactly what changed. As of the first run (November 2026, versions on the page):
 
 - No library accepted a wrong challenge, origin, RP ID, ceremony type, missing user presence or a bad signature. The core checks hold everywhere.
-- The Level 3 `topOrigin` check is uneven: SimpleWebAuthn checks it on login but not on registration, webauthn-rs (`allow_cross_origin`, off by default) on registration but not on login, py_webauthn and java-webauthn-server on neither; webauthn-ruby only with `verify_cross_origin: true`, which is off by default. This only matters for sites that let other origins frame their login page.
-- Almost no library validates the credential public key at registration: points off the curve, mismatched algorithm and key type, a small-order Ed25519 key or RSA with `e = 1` are stored as if they were fine. java-webauthn-server rejects most of them.
-- Lenient parsing differs in every library: trailing bytes after authenticatorData or after the attestation object, duplicate CBOR keys (java-webauthn-server keeps the last one), non-DER ECDSA signatures (SimpleWebAuthn), credential IDs longer than 1023 bytes.
-- web-auth/webauthn-lib accepts ECDSA signatures in raw `r || s` form instead of DER, and, like java-webauthn-server, lets a plain `InvalidArgumentException` escape `check()` for malformed signatures.
-- java-webauthn-server answers malformed assertion signatures, which anyone can send for any account, with a `RuntimeException` instead of `AssertionFailedException`. An application that catches the documented exception answers 500 instead of 401.
+- The libraries differ on how strictly they parse: trailing bytes after authenticatorData or after the attestation object, duplicate CBOR keys, non-DER ECDSA signatures, origins that differ only in spelling, credential IDs longer than 1023 bytes. These are differences in strictness, not vulnerabilities.
+- Almost no library validates the credential public key at registration (points off the curve, mismatched algorithm and key type, RSA with `e = 1`). The key belongs to the attacker's own credential, so this is hardening.
+- `crossOrigin`/`topOrigin` (Level 3) are handled differently in every library. The webauthn-rs maintainers explained why checking them is defence in depth at best: the page must allow being framed, older clients never send these fields, and `topOrigin` does not show every origin in a chain of nested iframes. These cases are classified as hardening.
+- java-webauthn-server and web-auth/webauthn-lib throw an undocumented exception type (`RuntimeException`, `InvalidArgumentException`) for malformed assertion signatures, which anyone can send; an application that only catches the documented exception answers 500 instead of 401 ([java-webauthn-server#234](https://github.com/Yubico/java-webauthn-server/issues/234)).
 
-None of these is a way to log in as someone else. New findings with a security impact are reported privately to the maintainers before they are published.
+## Disclosure
+
+Findings that may have a security impact are reported privately to the maintainers, and the cases stay out of this repository until a fix is released or the maintainers agree to publish.
+
+This was not followed for the first version: the `crossOrigin` cases were published, labelled as security issues, before the webauthn-rs maintainers were contacted. After their review they are classified as hardening, as explained above. The first webauthn-rs adapter also used the lower-level `webauthn-rs-core` crate, version 0.5.5; it now uses the public `webauthn-rs` passkey API, current release.
 
 ## Run it
 
@@ -67,7 +70,13 @@ node src/cli.ts run py_webauthn    # just one
 
 `src/authenticator.ts` is a software authenticator that builds the JSON a browser returns from `PublicKeyCredential.toJSON()`, with every field open to tampering. `src/cbor.ts` is a CBOR encoder that can also produce the encodings a correct encoder never would. `src/cases.ts` defines the cases.
 
-Each adapter in `adapters/` is a small program that reads cases as JSON lines on stdin and prints one verdict per line. It uses its library the way an application would: it starts a ceremony with the library's own API, then swaps in the case's fixed challenge. For login cases it first registers the credential with the same library, then sets the stored counter. An adapter also flags rejections that come from an exception type the library does not document.
+Each adapter in `adapters/` is a small program that reads cases as JSON lines on stdin and prints one verdict per line. It uses its library's public API the way an application would, and for login cases it first registers the credential with the same library, then sets the stored counter. An adapter also flags rejections that come from an exception type the library does not document.
+
+The cases carry fixed challenges, because the challenge is inside the signed data. Most libraries take the expected challenge as a parameter. go-webauthn and webauthn-rs generate it themselves: their adapters start the ceremony normally, then replace only the challenge in the stored ceremony state (for webauthn-rs, through its `danger-allow-state-serialisation` feature, which applications use to keep that state in a database). Library-specific notes:
+
+- **webauthn-rs**: the passkey API always requires user verification and offers ES256 and RS256; 0.6 has no Ed25519, so EdDSA cases are marked unsupported.
+- **webauthn4j**: configured with its attestation verifiers; `createNonStrictWebAuthnManager()` skips attestation verification by design.
+- **webauthn-ruby**: default settings, including `verify_cross_origin: false`.
 
 ### Adding a library
 
