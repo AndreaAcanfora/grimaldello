@@ -3,6 +3,7 @@ import type { Analysis, Outcome } from "./analyze.ts";
 const MARK: Record<Outcome, string> = {
   ok: "✅",
   bypass: "🔓",
+  permissive: "🟠",
   "false-reject": "⛔",
   crash: "💥",
   unsupported: "➖",
@@ -20,10 +21,10 @@ export function markdownReport(a: Analysis): string {
   lines.push("");
   const s = a.summary;
   lines.push(
-    `${s.cases} cases. 🔓 accepted but must reject: **${s.bypasses}** (of which security-relevant: **${s.securityBypasses}**) · ⛔ rejected but must accept: **${s.falseRejects}** · 💥 crashes: **${s.crashes}** · ⚠️ undocumented exceptions: **${s.unexpected}** · cases where libraries disagree: **${s.divergent}**`,
+    `${s.cases} cases. 🔓 security-relevant inputs accepted: **${s.securityBypasses}** · 🟠 malformed inputs accepted (hardening): **${s.permissive}** · ⛔ rejected but must accept: **${s.falseRejects}** · 💥 crashes: **${s.crashes}** · ⚠️ undocumented exceptions: **${s.unexpected}** · cases where libraries disagree: **${s.divergent}**`,
     "",
   );
-  lines.push("Legend: ✅ follows the spec · 🔓 accepts what it must reject · ⛔ rejects a valid ceremony · 💥 crash · 🟡/⚪ accepts/rejects where the spec leaves a choice · ➖ algorithm not supported · ⚠️ rejected, but by throwing an exception type the library does not document (an application catching the documented one answers 500)", "");
+  lines.push("Legend: ✅ follows the spec · 🔓 accepts a security-relevant input it must reject · 🟠 more permissive than the spec on a malformed input · ⛔ rejects a valid ceremony · 💥 crash · 🟡/⚪ accepts/rejects where the spec leaves a choice · ➖ algorithm not supported · ⚠️ rejected, but by throwing an exception type the library does not document (an application catching the documented one answers 500)", "");
   lines.push("Impact: **security** means an honest browser under attack can produce the input; **hardening** means only a modified client or authenticator can, affecting the attacker's own credential.", "");
   lines.push(`| Case | Impact | Expect | ${names.join(" | ")} |`, `|---|---|---|${names.map(() => "---").join("|")}|`);
   for (const c of a.cases) {
@@ -31,7 +32,7 @@ export function markdownReport(a: Analysis): string {
     lines.push(`| \`${c.id}\`<br>${c.title} | ${c.impact} | ${c.expect} | ${cells.join(" | ")} |`);
   }
   lines.push("");
-  const notable = a.cases.filter((c) => Object.values(c.results).some((r) => r.outcome === "bypass" || r.outcome === "false-reject" || r.outcome === "crash" || r.unexpected));
+  const notable = a.cases.filter((c) => Object.values(c.results).some((r) => r.outcome === "bypass" || r.outcome === "permissive" || r.outcome === "false-reject" || r.outcome === "crash" || r.unexpected));
   if (notable.length) {
     lines.push("## Details", "");
     for (const c of notable) {

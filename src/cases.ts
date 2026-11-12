@@ -55,10 +55,10 @@ export interface Case {
 const ALGORITHMS = [-7, -8, -257];
 
 const SECURITY = new Set([
-  "reg-wrong-challenge", "reg-wrong-origin", "reg-origin-subdomain", "reg-origin-http", "reg-type-get", "reg-cross-origin-true",
+  "reg-wrong-challenge", "reg-wrong-origin", "reg-origin-subdomain", "reg-origin-http", "reg-type-get",
   "reg-wrong-rpid-hash", "reg-rpid-hash-parent", "reg-up-clear", "reg-uv-required-clear",
   "auth-wrong-challenge", "auth-wrong-origin", "auth-type-create", "auth-wrong-rpid-hash", "auth-up-clear", "auth-uv-required-clear",
-  "auth-signcount-regressed", "auth-signcount-equal", "auth-cross-origin-true",
+  "auth-signcount-regressed", "auth-signcount-equal",
   "sig-wrong-data", "sig-es256-zero", "sig-empty", "sig-other-credential",
   "att-packed-bad-sig",
 ]);
@@ -192,14 +192,14 @@ export function buildCases(): Case[] {
     reg({ id: "reg-dup-challenge-first", title: "clientDataJSON with two challenge members, the wrong one first", category: "client-data", expect: "reject", spec: "§5.8.1.2: the JSON is not in the limited verification form; parsers disagree on which duplicate wins" }, { clientDataRaw: dupKey("challenge", b64url(filler(32, 0x99)), true) }),
     reg({ id: "reg-dup-challenge-last", title: "clientDataJSON with two challenge members, the wrong one last", category: "client-data", expect: "reject", spec: "§5.8.1.2: duplicate members; most JSON parsers keep the last one" }, { clientDataRaw: dupKey("challenge", b64url(filler(32, 0x99)), false) }),
     reg({ id: "reg-dup-origin-last", title: "clientDataJSON with a second, malicious origin member", category: "client-data", expect: "reject", spec: "§5.8.1.2: duplicate members" }, { clientDataRaw: dupKey("origin", "https://evil.test", false) }),
-    reg({ id: "reg-cross-origin-true", title: "crossOrigin: true without a topOrigin the RP allows", category: "client-data", expect: "reject", spec: "§7.1 steps 10–11 (Level 3): the RP did not opt in to cross-origin iframes" }, { clientData: (cd) => ({ ...cd, crossOrigin: true, topOrigin: "https://evil.test" }) }),
+    reg({ id: "reg-cross-origin-true", title: "crossOrigin: true without a topOrigin the RP allows", category: "client-data", expect: "reject", spec: "§7.1 steps 10–11 (Level 3). Defence in depth only: the page must allow being framed, clients before Level 2 never send these fields, and topOrigin does not show every origin in a chain of nested iframes" }, { clientData: (cd) => ({ ...cd, crossOrigin: true, topOrigin: "https://evil.test" }) }),
     reg({ id: "reg-challenge-padded", title: "Challenge encoded as base64url with = padding", category: "client-data", expect: "reject", spec: "§5.8.1: challenge is base64url without padding; the decoded bytes still match" }, { clientData: (cd) => ({ ...cd, challenge: `${cd.challenge}=` }) }),
     reg({ id: "reg-challenge-std-base64", title: "Challenge encoded as standard base64 (+ and /)", category: "client-data", expect: "reject", spec: "§5.8.1: challenge is base64url" }, { clientData: (cd) => ({ ...cd, challenge: Buffer.from(cd.challenge as string, "base64url").toString("base64") }) }),
     reg({ id: "reg-client-data-bom", title: "clientDataJSON starting with a UTF-8 byte order mark", category: "client-data", expect: "either", spec: "§5.8.1.2: browsers never emit a BOM; JSON parsers differ" }, { clientDataRaw: (j) => `﻿${j}` }),
     auth({ id: "auth-wrong-challenge", title: "Challenge does not match", category: "client-data", expect: "reject", spec: "§7.2 step 11" }, { challenge: wrong }),
     auth({ id: "auth-wrong-origin", title: "Origin from another site", category: "client-data", expect: "reject", spec: "§7.2 step 12" }, { origin: "https://evil.test" }),
     auth({ id: "auth-type-create", title: "type is webauthn.create in an authentication", category: "client-data", expect: "reject", spec: "§7.2 step 10" }, { clientData: (cd) => ({ ...cd, type: "webauthn.create" }) }),
-    auth({ id: "auth-cross-origin-true", title: "crossOrigin: true without a topOrigin the RP allows", category: "client-data", expect: "reject", spec: "§7.2 steps 13–14 (Level 3): the RP did not opt in to cross-origin iframes" }, { clientData: (cd) => ({ ...cd, crossOrigin: true, topOrigin: "https://evil.test" }) }),
+    auth({ id: "auth-cross-origin-true", title: "crossOrigin: true without a topOrigin the RP allows", category: "client-data", expect: "reject", spec: "§7.2 steps 13–14 (Level 3). Defence in depth only: the page must allow being framed, clients before Level 2 never send these fields, and topOrigin does not show every origin in a chain of nested iframes" }, { clientData: (cd) => ({ ...cd, crossOrigin: true, topOrigin: "https://evil.test" }) }),
     auth({ id: "auth-dup-challenge-last", title: "clientDataJSON with two challenge members, the wrong one last", category: "client-data", expect: "reject", spec: "§5.8.1.2" }, { clientDataRaw: dupKey("challenge", b64url(filler(32, 0x99)), false) }),
 
     // ── authenticatorData ────────────────────────────────────────────────

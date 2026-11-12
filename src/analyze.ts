@@ -16,7 +16,8 @@ export interface AdapterInfo {
 
 export type Outcome =
   | "ok" // matches the specification
-  | "bypass" // accepted something the specification says to reject
+  | "bypass" // accepted a security-relevant input the specification says to reject
+  | "permissive" // accepted a malformed input (hardening) the specification says to reject
   | "false-reject" // rejected a valid ceremony
   | "crash"
   | "unsupported"
@@ -39,15 +40,19 @@ export interface Analysis {
   generatedAt: string;
   adapters: AdapterInfo[];
   cases: CaseResult[];
-  summary: { cases: number; unexpected: number; securityBypasses: number; bypasses: number; falseRejects: number; crashes: number; divergent: number };
+  summary: { cases: number; unexpected: number; permissive: number; securityBypasses: number; bypasses: number; falseRejects: number; crashes: number; divergent: number };
 }
 
-function outcome(expect: Expect, v: Verdict): Outcome {
+function outcome(c: Case, v: Verdict): Outcome {
   if (v.verdict === "crash") return "crash";
   if (v.verdict === "unsupported") return "unsupported";
-  if (expect === "either") return v.verdict === "accept" ? "lenient" : "strict";
-  if (expect === v.verdict) return "ok";
-  return v.verdict === "accept" ? "bypass" : "false-reject";
+  if (c.expect === "either") return v.verdict === "accept" ? "lenient" : "strict";
+  if (c.expect === v.verdict) return "ok";
+  if (v.verdict === "reject") return "false-reject";
+  // Only a modified client or authenticator can send a hardening case, and it
+  // only affects the attacker's own credential: being more permissive than
+  // the specification is a difference, not a vulnerability.
+  return c.impact === "hardening" ? "permissive" : "bypass";
 }
 
 export function analyze(cases: Case[], runs: { info: AdapterInfo; verdicts: Map<string, Verdict> }[]): Analysis {
@@ -55,7 +60,7 @@ export function analyze(cases: Case[], runs: { info: AdapterInfo; verdicts: Map<
     const results: CaseResult["results"] = {};
     for (const r of runs) {
       const v = r.verdicts.get(c.id) ?? { verdict: "crash", error: "no verdict" };
-      results[r.info.name] = { ...v, outcome: outcome(c.expect, v) };
+      results[r.info.name] = { ...v, outcome: outcome(c, v) };
     }
     const verdicts = new Set(Object.values(results).filter((r) => r.verdict !== "unsupported").map((r) => r.verdict));
     return {
@@ -81,6 +86,7 @@ export function analyze(cases: Case[], runs: { info: AdapterInfo; verdicts: Map<
       bypasses: all.filter((r) => r.outcome === "bypass").length,
       falseRejects: all.filter((r) => r.outcome === "false-reject").length,
       unexpected: all.filter((r) => r.unexpected).length,
+      permissive: all.filter((r) => r.outcome === "permissive").length,
       crashes: all.filter((r) => r.outcome === "crash").length,
       divergent: out.filter((c) => c.divergent).length,
     },

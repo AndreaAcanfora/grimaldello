@@ -114,7 +114,7 @@ function run(only: string[]) {
   writeFileSync(join(ROOT, "results/results.json"), JSON.stringify(analysis, null, 2) + "\n");
   writeFileSync(join(ROOT, "results/RESULTS.md"), markdownReport(analysis));
   const s = analysis.summary;
-  console.log(`${cases.length} cases × ${results.length} libraries: ${s.bypasses} accepted-but-must-reject, ${s.falseRejects} rejected-but-must-accept, ${s.crashes} crashes, ${s.unexpected} undocumented exceptions, ${s.divergent} cases where libraries disagree`);
+  console.log(`${cases.length} cases × ${results.length} libraries: ${s.securityBypasses} security-relevant inputs accepted, ${s.permissive} malformed inputs accepted, ${s.falseRejects} rejected-but-must-accept, ${s.crashes} crashes, ${s.unexpected} undocumented exceptions, ${s.divergent} cases where libraries disagree`);
   console.log("results/RESULTS.md");
   // A baseline that a library rejects means the harness is wrong, not the
   // library: fail loudly so results built on it are not published.

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T21:38:53.892Z",
+  "generatedAt": "2026-11-12T09:13:15.375Z",
   "adapters": [
     {
       "name": "simplewebauthn",
@@ -21,15 +21,15 @@
     },
     {
       "name": "java-webauthn-server",
-      "library": "java-webauthn-server",
+      "version": "2.10.1",
       "language": "Java",
-      "version": "2.10.1"
+      "library": "java-webauthn-server"
     },
     {
       "name": "webauthn-rs",
       "language": "Rust",
       "library": "webauthn-rs",
-      "version": "0.5.5"
+      "version": "0.6.2"
     },
     {
       "name": "web-auth",
@@ -121,8 +121,8 @@
           "outcome": "ok"
         },
         "webauthn-rs": {
-          "verdict": "accept",
-          "outcome": "ok"
+          "verdict": "unsupported",
+          "outcome": "unsupported"
         },
         "web-auth": {
           "verdict": "accept",
@@ -297,8 +297,8 @@
           "outcome": "ok"
         },
         "webauthn-rs": {
-          "verdict": "accept",
-          "outcome": "ok"
+          "verdict": "unsupported",
+          "outcome": "unsupported"
         },
         "web-auth": {
           "verdict": "accept",
@@ -580,7 +580,7 @@
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "reject",
@@ -589,19 +589,19 @@
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -627,7 +627,7 @@
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "reject",
@@ -636,7 +636,7 @@
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -645,11 +645,11 @@
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -675,7 +675,7 @@
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "reject",
@@ -684,19 +684,19 @@
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -868,19 +868,19 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "reject",
@@ -889,15 +889,15 @@
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -1012,16 +1012,16 @@
       "category": "client-data",
       "ceremony": "registration",
       "expect": "reject",
-      "spec": "§7.1 steps 10–11 (Level 3): the RP did not opt in to cross-origin iframes",
-      "impact": "security",
+      "spec": "§7.1 steps 10–11 (Level 3). Defence in depth only: the page must allow being framed, clients before Level 2 never send these fields, and topOrigin does not show every origin in a chain of nested iframes",
+      "impact": "hardening",
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "reject",
@@ -1030,7 +1030,7 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "reject",
@@ -1071,7 +1071,7 @@
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "reject",
@@ -1080,11 +1080,11 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -1094,11 +1094,11 @@
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -1119,7 +1119,7 @@
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "reject",
@@ -1128,11 +1128,11 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -1142,11 +1142,11 @@
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -1364,8 +1364,8 @@
       "category": "client-data",
       "ceremony": "authentication",
       "expect": "reject",
-      "spec": "§7.2 steps 13–14 (Level 3): the RP did not opt in to cross-origin iframes",
-      "impact": "security",
+      "spec": "§7.2 steps 13–14 (Level 3). Defence in depth only: the page must allow being framed, clients before Level 2 never send these fields, and topOrigin does not show every origin in a chain of nested iframes",
+      "impact": "hardening",
       "results": {
         "simplewebauthn": {
           "verdict": "reject",
@@ -1374,7 +1374,7 @@
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "reject",
@@ -1383,11 +1383,11 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -1814,7 +1814,7 @@
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -1855,7 +1855,7 @@
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -1907,7 +1907,7 @@
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -1939,11 +1939,11 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "reject",
@@ -1952,19 +1952,19 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -1985,11 +1985,11 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "reject",
@@ -1998,11 +1998,11 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -2413,11 +2413,11 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -2500,11 +2500,11 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "reject",
@@ -2513,7 +2513,7 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "reject",
@@ -2533,7 +2533,7 @@
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -2564,7 +2564,7 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "reject",
@@ -2720,7 +2720,7 @@
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -2730,7 +2730,7 @@
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -2871,9 +2871,8 @@
           "outcome": "ok"
         },
         "webauthn-rs": {
-          "verdict": "reject",
-          "error": "CredentialAlteredAlgFromRequest",
-          "outcome": "ok"
+          "verdict": "unsupported",
+          "outcome": "unsupported"
         },
         "web-auth": {
           "verdict": "reject",
@@ -2904,15 +2903,15 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "reject",
@@ -2927,11 +2926,11 @@
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -2952,15 +2951,15 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "reject",
@@ -2974,7 +2973,7 @@
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "reject",
@@ -3000,15 +2999,15 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "reject",
@@ -3022,15 +3021,15 @@
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -3046,32 +3045,32 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "OpenSSLError(ErrorStack([Error { code: 134217835, library: \"elliptic curve routines\", function: \"EC_POINT_set_affine_coordinates\", reason: \"point is not on curve\", file: \"crypto/ec/ec_lib.c\", line: 879 }]))",
+          "error": "EcdsaPointInvalid",
           "outcome": "ok"
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -3092,15 +3091,15 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "reject",
@@ -3115,11 +3114,11 @@
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -3140,35 +3139,35 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
-          "verdict": "accept",
-          "outcome": "bypass"
+          "verdict": "unsupported",
+          "outcome": "unsupported"
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": false
@@ -3184,15 +3183,15 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "go-webauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "java-webauthn-server": {
           "verdict": "reject",
@@ -3207,11 +3206,11 @@
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -3394,12 +3393,12 @@
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "OpenSSLError(ErrorStack([]))",
+          "error": "SignatureInvalid",
           "outcome": "ok"
         },
         "web-auth": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn4j": {
           "verdict": "reject",
@@ -3425,7 +3424,7 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "reject",
@@ -3445,7 +3444,7 @@
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "OpenSSLError(ErrorStack([]))",
+          "error": "SignatureInvalid",
           "outcome": "ok"
         },
         "web-auth": {
@@ -3461,7 +3460,7 @@
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -3477,7 +3476,7 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "reject",
@@ -3497,7 +3496,7 @@
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "OpenSSLError(ErrorStack([]))",
+          "error": "SignatureInvalid",
           "outcome": "ok"
         },
         "web-auth": {
@@ -3513,7 +3512,7 @@
         },
         "fido2-net-lib": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         }
       },
       "divergent": true
@@ -3550,7 +3549,7 @@
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "OpenSSLError(ErrorStack([]))",
+          "error": "SignatureInvalid",
           "outcome": "ok"
         },
         "web-auth": {
@@ -3603,7 +3602,7 @@
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "AuthenticationFailure",
+          "error": "SignatureInvalid",
           "outcome": "ok"
         },
         "web-auth": {
@@ -3656,7 +3655,7 @@
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "AuthenticationFailure",
+          "error": "SignatureInvalid",
           "outcome": "ok"
         },
         "web-auth": {
@@ -3708,9 +3707,8 @@
           "outcome": "ok"
         },
         "webauthn-rs": {
-          "verdict": "reject",
-          "error": "AuthenticationFailure",
-          "outcome": "ok"
+          "verdict": "unsupported",
+          "outcome": "unsupported"
         },
         "web-auth": {
           "verdict": "reject",
@@ -3761,9 +3759,8 @@
           "outcome": "ok"
         },
         "webauthn-rs": {
-          "verdict": "reject",
-          "error": "AuthenticationFailure",
-          "outcome": "ok"
+          "verdict": "unsupported",
+          "outcome": "unsupported"
         },
         "web-auth": {
           "verdict": "reject",
@@ -3868,7 +3865,7 @@
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "AuthenticationFailure",
+          "error": "SignatureInvalid",
           "outcome": "ok"
         },
         "web-auth": {
@@ -3922,7 +3919,7 @@
         },
         "webauthn-rs": {
           "verdict": "reject",
-          "error": "OpenSSLError(ErrorStack([]))",
+          "error": "SignatureInvalid",
           "outcome": "ok"
         },
         "web-auth": {
@@ -3969,11 +3966,11 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -4019,7 +4016,7 @@
         },
         "java-webauthn-server": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "webauthn-rs": {
           "verdict": "reject",
@@ -4108,7 +4105,7 @@
       "results": {
         "simplewebauthn": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "py_webauthn": {
           "verdict": "reject",
@@ -4281,7 +4278,7 @@
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -4290,7 +4287,7 @@
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -4331,7 +4328,7 @@
         },
         "webauthn-rs": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "web-auth": {
           "verdict": "reject",
@@ -4340,7 +4337,7 @@
         },
         "webauthn4j": {
           "verdict": "accept",
-          "outcome": "bypass"
+          "outcome": "permissive"
         },
         "fido2-net-lib": {
           "verdict": "reject",
@@ -4397,10 +4394,11 @@
   ],
   "summary": {
     "cases": 87,
-    "securityBypasses": 6,
-    "bypasses": 111,
+    "securityBypasses": 0,
+    "bypasses": 0,
     "falseRejects": 0,
     "unexpected": 36,
+    "permissive": 110,
     "crashes": 0,
     "divergent": 36
   }
