@@ -57,7 +57,7 @@ jobs:
       - name: Run every adapter
         run: node src/cli.ts run
       - run: cat results/RESULTS.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: results
           path: results/
