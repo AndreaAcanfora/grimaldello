@@ -56,8 +56,8 @@ const ALGORITHMS = [-7, -8, -257];
 
 const SECURITY = new Set([
   "reg-wrong-challenge", "reg-wrong-origin", "reg-origin-subdomain", "reg-origin-http", "reg-type-get",
-  "reg-wrong-rpid-hash", "reg-rpid-hash-parent", "reg-up-clear", "reg-uv-required-clear",
-  "auth-wrong-challenge", "auth-wrong-origin", "auth-type-create", "auth-wrong-rpid-hash", "auth-up-clear", "auth-uv-required-clear",
+  "reg-wrong-rpid-hash", "reg-rpid-hash-parent", "reg-uv-required-clear",
+  "auth-wrong-challenge", "auth-wrong-origin", "auth-type-create", "auth-wrong-rpid-hash", "auth-uv-required-clear",
   "auth-signcount-regressed", "auth-signcount-equal",
   "sig-wrong-data", "sig-es256-zero", "sig-empty", "sig-other-credential",
   "att-packed-bad-sig",
@@ -205,7 +205,7 @@ export function buildCases(): Case[] {
     // ── authenticatorData ────────────────────────────────────────────────
     reg({ id: "reg-wrong-rpid-hash", title: "rpIdHash of another RP ID", category: "authenticator-data", expect: "reject", spec: "§7.1 step 14" }, { rpIdHash: sha256(utf8("evil.test")) }),
     reg({ id: "reg-rpid-hash-parent", title: "rpIdHash of a registrable suffix (com)", category: "authenticator-data", expect: "reject", spec: "§7.1 step 14: must equal SHA-256 of the RP ID the RP expects" }, { rpIdHash: sha256(utf8("com")) }),
-    reg({ id: "reg-up-clear", title: "User Present flag not set", category: "authenticator-data", expect: "reject", spec: "§7.1 step 15 (Level 3: unless conditional create was requested)" }, { flags: FLAG.UV | FLAG.AT }),
+    reg({ id: "reg-up-clear", title: "User Present flag not set", category: "authenticator-data", expect: "reject", spec: "§7.1 step 15 (Level 3: unless conditional create was requested). Browsers always request user presence, so UP=0 with UV=1 needs a modified client" }, { flags: FLAG.UV | FLAG.AT }),
     reg({ id: "reg-uv-required-clear", requireUserVerification: true, title: "User verification required but UV flag not set", category: "authenticator-data", expect: "reject", spec: "§7.1 step 16" }, { flags: FLAG.UP | FLAG.AT }),
     reg({ id: "reg-at-clear", title: "Attested credential data present but AT flag not set", category: "authenticator-data", expect: "reject", spec: "§6.1: authData is malformed" }, { flags: FLAG.UP | FLAG.UV }),
     reg({ id: "reg-be-clear-bs-set", title: "Backup State set without Backup Eligible", category: "authenticator-data", expect: "reject", spec: "§6.1.3: BS=1 with BE=0 is an invalid combination; §7.1 step 17" }, { flags: FLAG.UP | FLAG.UV | FLAG.AT | FLAG.BS }),
@@ -216,7 +216,7 @@ export function buildCases(): Case[] {
     reg({ id: "reg-cred-id-too-long", title: "Credential ID of 1024 bytes", category: "authenticator-data", expect: "reject", spec: "§7.1 step 28: credentialId must be at most 1023 bytes" }, (() => { const id = filler(1024, 0x44); return { authDataCredId: id, id: b64url(id), rawId: b64url(id) }; })()),
     reg({ id: "reg-cred-id-length-overflow", title: "credentialIdLength larger than the remaining data", category: "authenticator-data", expect: "reject", spec: "§6.5.1: authData is truncated" }, { credIdLength: 0xffff }),
     auth({ id: "auth-wrong-rpid-hash", title: "rpIdHash of another RP ID", category: "authenticator-data", expect: "reject", spec: "§7.2 step 15" }, { rpIdHash: sha256(utf8("evil.test")) }),
-    auth({ id: "auth-up-clear", title: "User Present flag not set", category: "authenticator-data", expect: "reject", spec: "§7.2 step 16" }, { flags: FLAG.UV }),
+    auth({ id: "auth-up-clear", title: "User Present flag not set", category: "authenticator-data", expect: "reject", spec: "§7.2 step 16. Browsers always request user presence, so UP=0 with UV=1 needs a modified client" }, { flags: FLAG.UV }),
     auth({ id: "auth-uv-required-clear", requireUserVerification: true, title: "User verification required but UV flag not set", category: "authenticator-data", expect: "reject", spec: "§7.2 step 17" }, { flags: FLAG.UP }),
     auth({ id: "auth-signcount-regressed", title: "Signature counter lower than the stored one", category: "authenticator-data", expect: "reject", spec: "§7.2 steps 22–23: a possible cloned authenticator; the RP decides, but silently accepting defeats the counter" }, { signCount: 5 }, 10),
     auth({ id: "auth-signcount-equal", title: "Signature counter equal to the stored one (non-zero)", category: "authenticator-data", expect: "reject", spec: "§7.2 steps 22–23: the counter must be strictly greater" }, { signCount: 10 }, 10),

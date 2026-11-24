@@ -45,6 +45,7 @@ The [results page](https://andreaacanfora.github.io/grimaldello/) is rebuilt eve
 - The libraries differ on how strictly they parse: trailing bytes after authenticatorData or after the attestation object, duplicate CBOR keys, non-DER ECDSA signatures, origins that differ only in spelling, credential IDs longer than 1023 bytes. These are differences in strictness, not vulnerabilities.
 - Almost no library validates the credential public key at registration (points off the curve, mismatched algorithm and key type, RSA with `e = 1`). The key belongs to the attacker's own credential, so this is hardening.
 - `crossOrigin`/`topOrigin` (Level 3) are handled differently in every library. The webauthn-rs maintainers explained why checking them is defence in depth at best: the page must allow being framed, older clients never send these fields, and `topOrigin` does not show every origin in a chain of nested iframes. These cases are classified as hardening.
+- webauthn-ruby treats a set UV flag as user presence even when UP is clear, deliberately since 2018. Browsers always request user presence, so this is hardening.
 - java-webauthn-server and web-auth/webauthn-lib throw an undocumented exception type (`RuntimeException`, `InvalidArgumentException`) for malformed assertion signatures, which anyone can send; an application that only catches the documented exception answers 500 instead of 401 ([java-webauthn-server#234](https://github.com/Yubico/java-webauthn-server/issues/234)).
 
 ## Disclosure
